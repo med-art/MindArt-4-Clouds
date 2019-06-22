@@ -94,7 +94,7 @@
   }
 
 
-  function mouseDragged() {
+  function touchMoved() {
 
     milliCounter = millis();
 
