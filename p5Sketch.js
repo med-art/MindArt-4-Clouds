@@ -117,7 +117,7 @@
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = mouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = mouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 2 * (width - (abs(mouseX - pmouseX))) / width);
+        scalar = random(0, 1 * (width - (abs(mouseX - pmouseX))) / width);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
@@ -125,6 +125,8 @@
         milliTrack = milliCounter;
       }
     } else {
+      strokeWeight(constrain(abs(mouseX-pmouseX),0.7,4)); // for line work
+      stroke(255, 0, 255); // for line work
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
   }
