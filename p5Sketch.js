@@ -58,8 +58,8 @@
     [300, 67, 99]
   ];
 
-  const hueDrift = 1;
-  const satDrift = 1;
+  const hueDrift = 3;
+  const satDrift = 3;
   const rotateDrift = 0.2;
 
 
