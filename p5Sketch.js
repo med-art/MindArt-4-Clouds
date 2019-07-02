@@ -89,8 +89,8 @@
   }
 
   function setup() {
-  var cnv = createCanvas(windowWidth, windowHeight);
-    cnv.style('display', 'block');
+createCanvas(windowWidth, windowHeight);
+
     pixelDensity(1); // Ignores retina displays
 
     imageMode(CENTER); // centers loaded brushes
