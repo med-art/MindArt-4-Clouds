@@ -4,7 +4,7 @@
 
   // bursh mechanics
   let angle1, segLength;
-  let scalar = 0;
+  let scalar = 30;
   let tempwinMouseX = 0;
   let tempwinMouseY = 0;
   let tempX = 100;
@@ -262,7 +262,7 @@ function invertColourSet() {
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = winMouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = winMouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 0.5 * (windowWidth - (abs(winMouseX - pwinMouseX))) / windowWidth);
+        scalar = constrain(100*(random(3,abs(winMouseX - pwinMouseX))/windowWidth),0,1.5);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
