@@ -134,19 +134,19 @@ createCanvas(windowWidth, windowHeight);
     textSize(windowWidth/50);
     fill(0);
 
-    let textOrient = windowHeight/3;
-    let textMargin = windowWidth/10;
+    let charMargin = 18;
+    let textMargin = windowWidth/50;
 
     button1A = createButton('Sunset Colours');
     button1B = createButton('Sea Colours');
     button2A = createButton('Paint');
     button2B = createButton('Trace');
     button3 = createButton('Restart');
-    button1A.position(20,20);
-    button1B.position(250,20);
-    button2A.position(20,80);
-    button2B.position(115,80);
-    button3.position(20,140);
+    button1A.position(textMargin,textMargin);
+    button1B.position(charMargin*16,textMargin); // 16 because 16 characters in 'Sunset Colours'
+    button2A.position(textMargin,textMargin*3.5);
+    button2B.position(charMargin*7,textMargin*3.5); // 7 because 7 characters in Paint
+    button3.position(textMargin,textMargin*6);
 
    col = color(0,0,0,0.2);
    colSelect = color(0,0,0,0.7);
@@ -253,7 +253,7 @@ function invertColourSet() {
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = winMouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = winMouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 0.25 * (windowWidth - (abs(winMouseX - pwinMouseX))) / windowWidth);
+        scalar = random(0, 0.5 * (windowWidth - (abs(winMouseX - pwinMouseX))) / windowWidth);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
