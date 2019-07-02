@@ -253,7 +253,7 @@ function invertColourSet() {
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = mouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = mouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 1 * (windowWidth - (abs(mouseX - pmouseX))) / windowWidth);
+        scalar = random(0, 0.25 * (windowWidth - (abs(mouseX - pmouseX))) / windowWidth);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
