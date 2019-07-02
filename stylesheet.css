@@ -6,5 +6,6 @@ html, body {
 body {
 
 overscroll-behavior: contain;
+position: fixed;
 
 }
