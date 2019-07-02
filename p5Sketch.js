@@ -231,7 +231,7 @@ function invertColourSet() {
 
   function touchMoved() {
 
-preventPullToRefresh('#id') // pass #id or html tag into the method
+
     milliCounter = millis();
 
     if (bool) {
@@ -282,5 +282,3 @@ preventPullToRefresh('#id') // pass #id or html tag into the method
   function windowResized() {
     setup(); // need to rewrite this to ensure image is saved
   }
-
-  
