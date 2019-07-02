@@ -168,13 +168,13 @@ createCanvas(windowWidth, windowHeight);
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
    button2A.style('border-radius', '1vw')
-   button2A.style('width', '12vw');
+   button2A.style('width', '12.5vw');
 
    button2B.style('background-color', col)
    button2B.style('font-size', '2vw');
    button2B.style('color', 'white');
    button2B.style('border-radius', '1vw')
-   button2B.style('width', '12vw');
+   button2B.style('width', '12.5vw');
    button2B.mousePressed(invertTracing);
 
    button3.style('background-color', col)
@@ -182,7 +182,7 @@ createCanvas(windowWidth, windowHeight);
    button3.style('color', 'white');
    button3.style('border-radius', '2vw')
    button3.mousePressed(backdrop);
-   button3.style('width', '12vw');
+   button3.style('width', '12.5vw');
 
 if (deviceOrientation === LANDSCAPE || deviceOrientation === 'undefined'){
 
