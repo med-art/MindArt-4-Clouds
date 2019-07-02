@@ -133,9 +133,10 @@ createCanvas(windowWidth, windowHeight);
 
     textSize(windowWidth/50);
     fill(0);
+    noStroke();
 
-    let charMargin = 18;
-    let textMargin = windowWidth/50;
+    let vw = windowWidth/100;
+    let textMargin = windowWidth/50; // consolidate into above - no point having 2
 
     button1A = createButton('Sunset Colours');
     button1B = createButton('Sea Colours');
@@ -143,9 +144,9 @@ createCanvas(windowWidth, windowHeight);
     button2B = createButton('Trace');
     button3 = createButton('Restart');
     button1A.position(textMargin,textMargin);
-    button1B.position(charMargin*16,textMargin); // 16 because 16 characters in 'Sunset Colours'
+    button1B.position((vw*25)+(textMargin*2),textMargin); // 16 because 16 characters in 'Sunset Colours'
     button2A.position(textMargin,textMargin*3.5);
-    button2B.position(charMargin*7.5,textMargin*3.5); // 7 because 7 characters in Paint
+    button2B.position(vw*12.5+(textMargin*2),textMargin*3.5); // 7 because 7 characters in Paint
     button3.position(textMargin,textMargin*6);
 
    col = color(0,0,0,0.2);
@@ -153,27 +154,35 @@ createCanvas(windowWidth, windowHeight);
    button1A.style('background-color', colSelect)
    button1A.style('font-size', '3vw');
    button1A.style('color', 'white');
+   button1A.style('width', '25vw');
    button1A.mousePressed(invertColourSet);
 
    button1B.style('background-color', col)
    button1B.style('font-size', '3vw');
    button1B.style('color', 'white');
+   button1B.style('width', '25vw');
    button1B.mousePressed(invertColourSet);
 
    button2A.style('background-color', colSelect)
    button2A.style('font-size', '3vw');
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
+   button2A.style('border-radius', '1vw')
+   button2A.style('width', '12.5vw');
 
    button2B.style('background-color', col)
    button2B.style('font-size', '3vw');
    button2B.style('color', 'white');
+   button2B.style('border-radius', '1vw')
+   button2B.style('width', '12.5vw');
    button2B.mousePressed(invertTracing);
 
    button3.style('background-color', col)
    button3.style('font-size', '3vw');
    button3.style('color', 'white');
+   button3.style('border-radius', '2vw')
    button3.mousePressed(backdrop);
+   button3.style('width', '12.5vw');
 
 if (deviceOrientation === LANDSCAPE || deviceOrientation === 'undefined'){
 
