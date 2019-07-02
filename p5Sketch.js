@@ -89,7 +89,7 @@
   }
 
   function setup() {
-createCanvas(windowWidth, windowHeight);
+createCanvas(windowwindowWidth, windowwindowHeight);
 
     pixelDensity(1); // Ignores retina displays
 
@@ -102,7 +102,7 @@ createCanvas(windowWidth, windowHeight);
 
   backdrop();
 
-    segLength = width / 15; // length of delay between touch and paint or line // 15 is a good value
+    segLength = windowWidth / 15; // length of delay between touch and paint or line // 15 is a good value
 
     strokeWeight(4); // for line work
     stroke(255, 0, 255); // for line work
@@ -112,7 +112,7 @@ createCanvas(windowWidth, windowHeight);
 
   function backdrop(){
       noTint();
-      image(bg, width / 2, height / 2, width, height); // display backgrond
+      image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight); // display backgrond
   }
 
   function invertTracing() {
@@ -131,11 +131,11 @@ createCanvas(windowWidth, windowHeight);
 
   function writeTextUI(){
 
-    textSize(width/50);
+    textSize(windowWidth/50);
     fill(0);
 
-    let textOrient = height/3;
-    let textMargin = width/10;
+    let textOrient = windowHeight/3;
+    let textMargin = windowWidth/10;
 
     button1A = createButton('Sunset Colours');
     button1B = createButton('Sea Colours');
@@ -204,13 +204,13 @@ function invertColourSet() {
 
   function mousePressed() {
 
-    tempMouseX = ((width / 2) - mouseX); // record position on downpress
-    tempMouseY = ((height / 2) - mouseY); // record position on downpress
+    tempMouseX = ((windowWidth / 2) - mouseX); // record position on downpress
+    tempMouseY = ((windowHeight / 2) - mouseY); // record position on downpress
     brushTemp = int(random(1, 20));
     tint(255, 0.01); // Display at half opacit
 
     if (bool) {
-      image(bg, width / 2, height / 2, width, height);
+      image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
       let swatchTemp = int(random(0,5));
       //console.log(swatchTemp);
 
@@ -253,7 +253,7 @@ function invertColourSet() {
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = mouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = mouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 1 * (width - (abs(mouseX - pmouseX))) / width);
+        scalar = random(0, 1 * (windowWidth - (abs(mouseX - pmouseX))) / windowWidth);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
