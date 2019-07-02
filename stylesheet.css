@@ -4,8 +4,6 @@ html, body {
 
 body {
 
+overscroll-behavior: contain;
 
-
-
- overflow-y: hidden
 }
