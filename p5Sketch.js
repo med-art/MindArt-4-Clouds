@@ -5,8 +5,8 @@
   // bursh mechanics
   let angle1, segLength;
   let scalar = 0;
-  let tempMouseX = 0;
-  let tempMouseY = 0;
+  let tempwinMouseX = 0;
+  let tempwinMouseY = 0;
   let tempX = 100;
   let tempY = 100;
   let dx;
@@ -204,8 +204,8 @@ function invertColourSet() {
 
   function mousePressed() {
 
-    tempMouseX = ((windowWidth / 2) - mouseX); // record position on downpress
-    tempMouseY = ((windowHeight / 2) - mouseY); // record position on downpress
+    tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
+    tempwinMouseY = ((windowHeight / 2) - winMouseY); // record position on downpress
     brushTemp = int(random(1, 20));
     tint(255, 0.01); // Display at half opacit
 
@@ -247,13 +247,13 @@ function invertColourSet() {
         console.log('Saturation = '+colSat);
         console.log('Brightness = '+colBri);
 
-        dx = mouseX - tempX;
-        dy = mouseY - tempY;
+        dx = winMouseX - tempX;
+        dy = winMouseY - tempY;
 
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
-        tempX = mouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
-        tempY = mouseY - (sin(angle1) * segLength/2);
-        scalar = random(0, 0.25 * (windowWidth - (abs(mouseX - pmouseX))) / windowWidth);
+        tempX = winMouseX - (cos(angle1) * segLength/2); // https://p5js.org/examples/interaction-follow-1.html
+        tempY = winMouseY - (sin(angle1) * segLength/2);
+        scalar = random(0, 0.25 * (windowWidth - (abs(winMouseX - pwinMouseX))) / windowWidth);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
@@ -261,9 +261,9 @@ function invertColourSet() {
         milliTrack = milliCounter;
       }
     } else {
-      strokeWeight(constrain(abs(mouseX-pmouseX),0.7,4)); // for line work
+      strokeWeight(constrain(abs(winMouseX-pwinMouseX),0.7,4)); // for line work
       stroke(255, 0, 255); // for line work
-      line(mouseX, mouseY, pmouseX, pmouseY);
+      line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
     }
   }
 
