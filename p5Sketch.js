@@ -145,7 +145,7 @@ createCanvas(windowWidth, windowHeight);
     button1A.position(textMargin,textMargin);
     button1B.position(charMargin*16,textMargin); // 16 because 16 characters in 'Sunset Colours'
     button2A.position(textMargin,textMargin*3.5);
-    button2B.position(charMargin*7,textMargin*3.5); // 7 because 7 characters in Paint
+    button2B.position(charMargin*7.5,textMargin*3.5); // 7 because 7 characters in Paint
     button3.position(textMargin,textMargin*6);
 
    col = color(0,0,0,0.2);
