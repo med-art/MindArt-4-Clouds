@@ -102,7 +102,7 @@ createCanvas(windowWidth, windowHeight);
 
   backdrop();
 
-    segLength = windowWidth / 15; // length of delay between touch and paint or line // 15 is a good value
+    segLength = windowWidth / 40; // length of delay between touch and paint or line // 15 is a good value
 
     strokeWeight(4); // for line work
     stroke(255, 0, 255); // for line work
@@ -135,8 +135,8 @@ createCanvas(windowWidth, windowHeight);
     fill(0);
     noStroke();
 
-    let vw = windowWidth/100;
-    let textMargin = windowWidth/50; // consolidate into above - no point having 2
+    let vw = windowWidth/100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
+    let textMargin = windowWidth/100; // consolidate into above - no point having 2
 
     button1A = createButton('Sunset Colours');
     button1B = createButton('Sea Colours');
@@ -144,45 +144,47 @@ createCanvas(windowWidth, windowHeight);
     button2B = createButton('Trace');
     button3 = createButton('Restart');
     button1A.position(textMargin,textMargin);
-    button1B.position((vw*25)+(textMargin*2),textMargin); // 16 because 16 characters in 'Sunset Colours'
-    button2A.position(textMargin,textMargin*3.5);
-    button2B.position(vw*12.5+(textMargin*2),textMargin*3.5); // 7 because 7 characters in Paint
-    button3.position(textMargin,textMargin*6);
+    button1B.position((vw*15)+textMargin,textMargin); // 16 because 16 characters in 'Sunset Colours'
+    button2A.position(textMargin,textMargin*4);
+    button2B.position(vw*12.5+textMargin,textMargin*4); // 7 because 7 characters in Paint
+    button3.position(textMargin,textMargin*7.5);
 
    col = color(0,0,0,0.2);
    colSelect = color(0,0,0,0.7);
+  colH3 = color(360,100,100,0.6);
+
    button1A.style('background-color', colSelect)
-   button1A.style('font-size', '2vw');
+   button1A.style('font-size', '1.5vw');
    button1A.style('color', 'white');
-   button1A.style('width', '25vw');
+   button1A.style('width', '15vw');5
    button1A.mousePressed(invertColourSet);
 
    button1B.style('background-color', col)
-   button1B.style('font-size', '2vw');
+   button1B.style('font-size', '1.5vw');
    button1B.style('color', 'white');
-   button1B.style('width', '25vw');
+   button1B.style('width', '15vw');
    button1B.mousePressed(invertColourSet);
 
    button2A.style('background-color', colSelect)
    button2A.style('font-size', '2vw');
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
-   button2A.style('border-radius', '1vw')
+  // button2A.style('border-radius', '1vw')
    button2A.style('width', '12.5vw');
 
    button2B.style('background-color', col)
    button2B.style('font-size', '2vw');
    button2B.style('color', 'white');
-   button2B.style('border-radius', '1vw')
+   //button2B.style('border-radius', '1vw')
    button2B.style('width', '12.5vw');
    button2B.mousePressed(invertTracing);
 
-   button3.style('background-color', col)
-   button3.style('font-size', '2vw');
+   button3.style('background-color', colH3);
+   button3.style('font-size', '1.25vw');
    button3.style('color', 'white');
    button3.style('border-radius', '2vw')
-   button3.mousePressed(backdrop);
-   button3.style('width', '12.5vw');
+   button3.mousePressed(reset);
+   button3.style('width', '8vw');
 
 if (deviceOrientation === LANDSCAPE || deviceOrientation === 'undefined'){
 
@@ -270,7 +272,7 @@ function invertColourSet() {
         milliTrack = milliCounter;
       }
     } else {
-      strokeWeight(constrain(abs(winMouseX-pwinMouseX),0.7,4)); // for line work
+      strokeWeight(constrain(abs((winMouseY+winMouseX)-(pwinMouseX+pwinMouseY)),0.4,4)); // for line work
       stroke(255, 0, 255); // for line work
       line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
     }
@@ -279,12 +281,19 @@ function invertColourSet() {
   function segment(rakeX, rakeY, a, rake, scalar) {
     push();
 
-    translate(rakeX + (randomGaussian(-scatterAmount, scatterAmount)), rakeY + (randomGaussian(-scatterAmount, scatterAmount)));
+    translate(rakeX + (randomGaussian(-scatterAmount*(0.1*scalar), scatterAmount*(0.1*scalar))), rakeY + (randomGaussian(-scatterAmount*(0.1*scalar), scatterAmount*(0.1*scalar))));
+//translate(rakeX, rakeY);
     rotate(a);
     scale(scalar);
 
     image(rake, 0, 0, 0, 0);
     pop();
+  }
+
+  function reset() {
+    backdrop();
+    if (!bool)
+   invertTracing();
   }
 
 
