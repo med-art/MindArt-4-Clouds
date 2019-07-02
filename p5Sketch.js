@@ -89,7 +89,7 @@
   }
 
   function setup() {
-    createCanvas(windowWidth, windowHeight);
+  var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display', 'block');
     pixelDensity(1); // Ignores retina displays
 
