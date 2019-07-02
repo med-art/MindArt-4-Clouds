@@ -64,7 +64,7 @@
 
 
   // STATE SWITCH
-  let bool = 0;
+  let bool = 1;
   let brushTemp = 0;
 
   // BUTTON TEXT
@@ -119,11 +119,13 @@
 
     if (bool) {
       button2A.style('background-color', colSelect);
+      button2A.style('border', 'white');
       button2B.style('background-color', col);
     }
     else {
       button2A.style('background-color', col);
       button2B.style('background-color', colSelect);
+
     }
   }
 
@@ -131,7 +133,8 @@
 
     textSize(width/50);
     fill(0);
-    noStroke();
+strokeWeight(50);
+
     let textOrient = height/3;
     let textMargin = width/10;
 
