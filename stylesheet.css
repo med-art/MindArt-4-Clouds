@@ -1,4 +1,4 @@
-html, body {
+html, body, div {
   height: 100%;
   overscroll-behavior: none;
   position: sticky;
