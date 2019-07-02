@@ -89,7 +89,7 @@
   }
 
   function setup() {
-createCanvas(windowwindowWidth, windowwindowHeight);
+createCanvas(windowWidth, windowHeight);
 
     pixelDensity(1); // Ignores retina displays
 
