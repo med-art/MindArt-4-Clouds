@@ -1,11 +1,11 @@
 html, body {
   height: 100%;
-  overscroll-behavior: contain;
+  overscroll-behavior: none;
 }
 
 body {
 
-overscroll-behavior: contain;
+overscroll-behavior: none;
 
 
 }
