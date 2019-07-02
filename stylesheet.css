@@ -12,5 +12,7 @@ body {
   /* This centers our sketch vertically. */
   align-items: center;
 
-  overflow-y: hidden
+  overflow-y: hidden;
+
+  position: fixed;
 }
