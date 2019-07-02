@@ -151,27 +151,27 @@ createCanvas(windowWidth, windowHeight);
    col = color(0,0,0,0.2);
    colSelect = color(0,0,0,0.7);
    button1A.style('background-color', colSelect)
-   button1A.style('font-size', '15px');
+   button1A.style('font-size', '3vw');
    button1A.style('color', 'white');
    button1A.mousePressed(invertColourSet);
 
    button1B.style('background-color', col)
-   button1B.style('font-size', '15px');
+   button1B.style('font-size', '3vw');
    button1B.style('color', 'white');
    button1B.mousePressed(invertColourSet);
 
    button2A.style('background-color', colSelect)
-   button2A.style('font-size', '15px');
+   button2A.style('font-size', '3vw');
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
 
    button2B.style('background-color', col)
-   button2B.style('font-size', '15px');
+   button2B.style('font-size', '3vw');
    button2B.style('color', 'white');
    button2B.mousePressed(invertTracing);
 
    button3.style('background-color', col)
-   button3.style('font-size', '15px');
+   button3.style('font-size', '3vw');
    button3.style('color', 'white');
    button3.mousePressed(backdrop);
 
