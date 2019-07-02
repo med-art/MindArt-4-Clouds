@@ -90,6 +90,7 @@
 
   function setup() {
     createCanvas(windowWidth, windowHeight);
+    cnv.style('display', 'block');
     pixelDensity(1); // Ignores retina displays
 
     imageMode(CENTER); // centers loaded brushes
@@ -119,7 +120,6 @@
 
     if (bool) {
       button2A.style('background-color', colSelect);
-      button2A.style('border', 'white');
       button2B.style('background-color', col);
     }
     else {
@@ -133,7 +133,6 @@
 
     textSize(width/50);
     fill(0);
-strokeWeight(50);
 
     let textOrient = height/3;
     let textMargin = width/10;
