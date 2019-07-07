@@ -272,7 +272,7 @@ function invertColourSet() {
         milliTrack = milliCounter;
       }
     } else {
-      strokeWeight(constrain(abs((winMouseY+winMouseX)-(pwinMouseX+pwinMouseY)),0.4,4)); // for line work
+      strokeWeight(constrain(abs((winMouseY+winMouseX)-(pwinMouseX+pwinMouseY)),0.3,0.8)); // for line work
       stroke(255, 0, 255); // for line work
       line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
     }
