@@ -115,16 +115,39 @@ createCanvas(windowWidth, windowHeight);
       image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight); // display backgrond
   }
 
+  function invertColourSet() {
+
+    colourBool = !colourBool;
+
+    if (colourBool) {
+      button1A.style('background-color', col);
+      button1A.style('color', 'grey');
+      button1B.style('background-color', colSelect);
+      button1B.style('color', 'white');
+    }
+    else {
+      button1A.style('background-color', colSelect);
+      button1A.style('color', 'white');
+      button1B.style('background-color', col);
+      button1B.style('color', 'grey');
+    }
+
+  }
+
   function invertTracing() {
     bool = !bool; // temporary invert function, will be overidden by UI
 
     if (bool) {
       button2A.style('background-color', colSelect);
+      button2A.style('color', 'white');
       button2B.style('background-color', col);
+      button2B.style('color', 'grey');
     }
     else {
       button2A.style('background-color', col);
+      button2A.style('color', 'grey');
       button2B.style('background-color', colSelect);
+      button2B.style('color', 'white');
 
     }
   }
@@ -142,16 +165,18 @@ createCanvas(windowWidth, windowHeight);
     button1B = createButton('Sea Colours');
     button2A = createButton('Paint');
     button2B = createButton('Trace');
-    button3 = createButton('Restart');
-    button1A.position(textMargin,textMargin);
-    button1B.position((vw*15)+textMargin,textMargin); // 16 because 16 characters in 'Sunset Colours'
-    button2A.position(textMargin,textMargin*4);
-    button2B.position(vw*12.5+textMargin,textMargin*4); // 7 because 7 characters in Paint
-    button3.position(textMargin,textMargin*7.5);
+    button3 = createButton('New drawing');
+
+    button1A.position(textMargin,windowHeight-textMargin*5);
+    button1B.position((vw*15)+textMargin,windowHeight-textMargin*5); // 16 because 16 characters in 'Sunset Colours'
+    button2A.position(textMargin,windowHeight-textMargin*8);
+    button2B.position(vw*12.5+textMargin,windowHeight-textMargin*8); // 7 because 7 characters in Paint
+
+    button3.position(windowWidth-(10*vw)-(textMargin*3),windowHeight-vw*4);
 
    col = color(0,0,0,0.2);
    colSelect = color(0,0,0,0.7);
-  colH3 = color(360,100,100,0.6);
+colH3 = color(355,87,74);
 
    button1A.style('background-color', colSelect)
    button1A.style('font-size', '1.5vw');
@@ -161,7 +186,7 @@ createCanvas(windowWidth, windowHeight);
 
    button1B.style('background-color', col)
    button1B.style('font-size', '1.5vw');
-   button1B.style('color', 'white');
+   button1B.style('color', 'grey');
    button1B.style('width', '15vw');
    button1B.mousePressed(invertColourSet);
 
@@ -169,49 +194,28 @@ createCanvas(windowWidth, windowHeight);
    button2A.style('font-size', '2vw');
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
-  // button2A.style('border-radius', '1vw')
+   button2A.style('border-radius', '0.25vw')
    button2A.style('width', '12.5vw');
 
    button2B.style('background-color', col)
    button2B.style('font-size', '2vw');
-   button2B.style('color', 'white');
-   //button2B.style('border-radius', '1vw')
+   button2B.style('color', 'grey');
+   button2B.style('border-radius', '0.25vw')
    button2B.style('width', '12.5vw');
    button2B.mousePressed(invertTracing);
 
    button3.style('background-color', colH3);
    button3.style('font-size', '1.25vw');
    button3.style('color', 'white');
-   button3.style('border-radius', '2vw')
+   button3.style('border-radius', '0.25vw')
+    button3.style('width', '10vw')
    button3.mousePressed(reset);
-   button3.style('width', '8vw');
 
-if (deviceOrientation === LANDSCAPE || deviceOrientation === 'undefined'){
-
-}
-
-else {
-
-}
 
   }
 
 
-function invertColourSet() {
 
-  colourBool = !colourBool;
-
-  if (colourBool) {
-    button1A.style('background-color', col);
-    button1B.style('background-color', colSelect);
-  }
-  else {
-    button1A.style('background-color', colSelect);
-    button1B.style('background-color', col);
-  }
-
-
-}
 
   function mousePressed() {
 
@@ -272,7 +276,7 @@ function invertColourSet() {
         milliTrack = milliCounter;
       }
     } else {
-      strokeWeight(constrain(abs((winMouseY+winMouseX)-(pwinMouseX+pwinMouseY)),0.3,0.8)); // for line work
+      strokeWeight(constrain(abs((winMouseY+winMouseX)-(pwinMouseX+pwinMouseY)),0.3,2)); // for line work
       stroke(255, 0, 255); // for line work
       line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
     }
