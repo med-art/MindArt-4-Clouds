@@ -78,6 +78,8 @@
 
   let wmax, hmax, longEdge, shortEdge, lmax;
 
+  let audio;
+
 
 let startState = 0;
   //button spacing
@@ -230,13 +232,13 @@ let startState = 0;
 
   }
 
-playAudio(){
+playAudio() {
   audio.loop();
   startState = 1;
 }
 
 
-  function mousePressed() {
+  function touchStarted() {
 
     if (startState === 0){
       playAudio();
