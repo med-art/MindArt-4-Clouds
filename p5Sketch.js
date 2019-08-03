@@ -240,9 +240,7 @@ function playAudio() {
 
   function touchStarted() {
 
-    if (startState === 0){
-      playAudio();
-    }
+
 
 
     tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
@@ -266,12 +264,15 @@ function playAudio() {
       }
 
     }
-    return false;
   }
 
 
   function touchMoved() {
+    if (startState === 0){
+      playAudio();
+    }
 
+    else if (startState > 0){
 
     milliCounter = millis();
 
@@ -307,6 +308,7 @@ function playAudio() {
       line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
     }
   }
+}
 
   function segment(rakeX, rakeY, a, rake, scalar) {
     push();
