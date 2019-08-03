@@ -230,14 +230,16 @@ let startState = 0;
 
   }
 
-
+playAudio(){
+  audio.loop();
+  startState = 1;
+}
 
 
   function mousePressed() {
 
     if (startState === 0){
-      audio.loop();
-      startState = 1;
+      playAudio();
     }
 
 
