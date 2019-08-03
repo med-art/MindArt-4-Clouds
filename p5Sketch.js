@@ -227,7 +227,7 @@ let startState = 0;
     button3.style('color', 'white');
     button3.style('border-radius', '0.25vmax')
     button3.style('width', '20vmax')
-    button3.mousePressed(reset);
+    button3.mousePressed(playAudio);
 
 
   }
