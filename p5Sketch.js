@@ -240,7 +240,9 @@ function playAudio() {
 
   function touchStarted() {
 
-
+    if (startState === 0){
+      playAudio();
+    }
 
 
     tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
@@ -264,14 +266,13 @@ function playAudio() {
       }
 
     }
+    return false;
   }
 
 
   function touchMoved() {
 
-    if (startState === 0){
-      playAudio();
-    }
+
     milliCounter = millis();
 
     if (bool) {
