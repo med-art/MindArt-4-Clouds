@@ -227,7 +227,7 @@ let startState = 0;
     button3.style('color', 'white');
     button3.style('border-radius', '0.25vmax')
     button3.style('width', '20vmax')
-    button3.mousePressed(playAudio);
+    button3.mousePressed(reset);
 
 
   }
@@ -240,9 +240,7 @@ function playAudio() {
 
   function touchStarted() {
 
-    if (startState === 0){
-      playAudio();
-    }
+
 
 
     tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
@@ -271,7 +269,9 @@ function playAudio() {
 
   function touchMoved() {
 
-
+    if (startState === 0){
+      playAudio();
+    }
     milliCounter = millis();
 
     if (bool) {
