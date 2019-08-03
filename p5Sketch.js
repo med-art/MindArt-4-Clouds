@@ -71,7 +71,7 @@
   let buttonText1state = 0;
   let buttonText2state = 0;
 
-  let button1A, button1B, button2A, button2B, button3;
+  let button1A, button1B, button2A, button2B, button3, button4;
 
   var col;
   var colSelect;
@@ -92,6 +92,8 @@ let startState = 0;
     }
 
     audio = loadSound('assets/audio.mp3');
+
+    button4 = createImg('assets/gui2.png');
 
   }
 
@@ -116,6 +118,7 @@ let startState = 0;
     stroke(255, 0, 255); // for line work
 
     writeTextUI();
+    writeTextUIAudio();
   }
 
   function backdrop() {
@@ -232,10 +235,23 @@ let startState = 0;
 
   }
 
-function playAudio() {
-  audio.loop();
-  startState = 1;
-}
+  function writeTextUIAudio() {
+    textSize(longEdge / 50);
+    fill(0);
+    noStroke();
+    let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
+    let textMargin = longEdge / 100; // consolidate into above - no point having 2
+  button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
+  button4.style('font-size', '1.75vmax');
+  button4.style('color', 'black');
+  button4.style('border-radius', '3.5vmax')
+  button4.style('width', '7vmax')
+  button4.mousePressed(switchSound);
+
+
+  }
+
+
 
 
   function touchStarted() {
@@ -268,11 +284,7 @@ function playAudio() {
 
 
   function touchMoved() {
-    if (startState === 0){
-      playAudio();
-    }
 
-    else if (startState > 0){
 
     milliCounter = millis();
 
@@ -306,9 +318,31 @@ function playAudio() {
       strokeWeight(constrain(abs((winMouseY + winMouseX) - (pwinMouseX + pwinMouseY)), 0.3, 2)); // for line work
       stroke(255, 0, 255); // for line work
       line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
-    }
+
   }
 }
+
+function switchSound() {
+  if (audio.isPlaying()) {
+  audio.stop();
+  button4.remove();
+button4 = createImg('assets/gui2.png');
+
+writeTextUIAudio();
+
+
+
+} else {
+audio.loop();
+ button4.remove();
+ button4 = createImg('assets/gui1.png');
+ writeTextUIAudio();
+
+}
+
+return false;
+}
+
 
   function segment(rakeX, rakeY, a, rake, scalar) {
     push();
