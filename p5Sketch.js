@@ -78,6 +78,8 @@
 
   let wmax, hmax, longEdge, shortEdge, lmax;
 
+
+let startState = 0;
   //button spacing
   //margin from right
 
@@ -231,13 +233,13 @@
 
 
 
-  function touchStarted() {
+  function mousePressed() {
 
-    if (audio.isPlaying()) {
-      // do nothing
-    } else {
-      audio.play();
+    if (startState === 0){
+      audio.loop();
+      startState = 1;
     }
+
 
     tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
     tempwinMouseY = ((windowHeight / 2) - winMouseY); // record position on downpress
