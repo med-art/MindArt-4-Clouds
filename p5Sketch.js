@@ -181,7 +181,7 @@ colH3 = color(355,87,74);
    button1A.style('background-color', colSelect)
    button1A.style('font-size', '1.5vw');
    button1A.style('color', 'white');
-   button1A.style('width', '15vw');5
+   button1A.style('width', '15vw');
    button1A.mousePressed(invertColourSet);
 
    button1B.style('background-color', col)
