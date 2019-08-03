@@ -232,7 +232,7 @@ let startState = 0;
 
   }
 
-playAudio() {
+function playAudio() {
   audio.loop();
   startState = 1;
 }
