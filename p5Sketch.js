@@ -182,9 +182,9 @@
     button3 = createButton('New drawing');
 
     button1A.position(lmax, windowHeight - lmax * 5);
-    button1B.position((lmax * 15) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
+    button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
     button2A.position(lmax, windowHeight - lmax * 10);
-    button2B.position(lmax * 12.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
+    button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
 
     button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
 
