@@ -231,7 +231,7 @@
 
 
 
-  function mousePressed() {
+  function touchStarted() {
 
     if (audio.isPlaying()) {
       // do nothing
