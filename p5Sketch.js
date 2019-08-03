@@ -76,7 +76,7 @@
   var col;
   var colSelect;
 
-
+  let wmax, hmax, longEdge, shortEdge, lmax;
 
   //button spacing
   //margin from right
@@ -90,6 +90,7 @@
 
   function setup() {
 createCanvas(windowWidth, windowHeight);
+dimensionCalc();
 
     pixelDensity(1); // Ignores retina displays
 
@@ -113,6 +114,20 @@ createCanvas(windowWidth, windowHeight);
   function backdrop(){
       noTint();
       image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight); // display backgrond
+  }
+
+  function dimensionCalc() {
+    wmax = width / 100;
+    hmax = height / 100;
+    if (width > height) {
+      longEdge = width;
+      shortEdge = height;
+      lmax = width / 100;
+    } else {
+      longEdge = height;
+      shortEdge = width;
+      lmax = height / 100;
+    }
   }
 
   function invertColourSet() {
@@ -158,8 +173,6 @@ createCanvas(windowWidth, windowHeight);
     fill(0);
     noStroke();
 
-    let vw = windowWidth/100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
-    let textMargin = windowWidth/100; // consolidate into above - no point having 2
 
     button1A = createButton('Sunset Colours');
     button1B = createButton('Sea Colours');
@@ -167,48 +180,48 @@ createCanvas(windowWidth, windowHeight);
     button2B = createButton('Trace');
     button3 = createButton('New drawing');
 
-    button1A.position(textMargin,windowHeight-textMargin*5);
-    button1B.position((vw*15)+textMargin,windowHeight-textMargin*5); // 16 because 16 characters in 'Sunset Colours'
-    button2A.position(textMargin,windowHeight-textMargin*8);
-    button2B.position(vw*12.5+textMargin,windowHeight-textMargin*8); // 7 because 7 characters in Paint
+    button1A.position(lmax,windowHeight-lmax*5);
+    button1B.position((lmax*15)+lmax,windowHeight-lmax*5); // 16 because 16 characters in 'Sunset Colours'
+    button2A.position(lmax,windowHeight-lmax*8);
+    button2B.position(lmax*12.5+lmax,windowHeight-lmax*8); // 7 because 7 characters in Paint
 
-    button3.position(windowWidth-(10*vw)-(textMargin*3),windowHeight-vw*4);
+    button3.position(windowWidth-(10*lmax)-(lmax*3),windowHeight-lmax*4);
 
    col = color(0,0,0,0.2);
    colSelect = color(0,0,0,0.7);
 colH3 = color(355,87,74);
 
    button1A.style('background-color', colSelect)
-   button1A.style('font-size', '1.5vw');
+   button1A.style('font-size', '1.5vmax');
    button1A.style('color', 'white');
-   button1A.style('width', '15vw');
+   button1A.style('width', '15vmax');
    button1A.mousePressed(invertColourSet);
 
    button1B.style('background-color', col)
-   button1B.style('font-size', '1.5vw');
+   button1B.style('font-size', '1.5vmax');
    button1B.style('color', 'grey');
-   button1B.style('width', '15vw');
+   button1B.style('width', '15vmax');
    button1B.mousePressed(invertColourSet);
 
    button2A.style('background-color', colSelect)
-   button2A.style('font-size', '2vw');
+   button2A.style('font-size', '2vmax');
    button2A.style('color', 'white');
    button2A.mousePressed(invertTracing);
-   button2A.style('border-radius', '0.25vw')
-   button2A.style('width', '12.5vw');
+   button2A.style('border-radius', '0.25vmax')
+   button2A.style('width', '12.5vmax');
 
    button2B.style('background-color', col)
-   button2B.style('font-size', '2vw');
+   button2B.style('font-size', '2vmax');
    button2B.style('color', 'grey');
-   button2B.style('border-radius', '0.25vw')
-   button2B.style('width', '12.5vw');
+   button2B.style('border-radius', '0.25vmax')
+   button2B.style('width', '12.5vmax');
    button2B.mousePressed(invertTracing);
 
    button3.style('background-color', colH3);
-   button3.style('font-size', '1.25vw');
+   button3.style('font-size', '1.25vmax');
    button3.style('color', 'white');
-   button3.style('border-radius', '0.25vw')
-    button3.style('width', '10vw')
+   button3.style('border-radius', '0.25vmax')
+    button3.style('width', '10vmax')
    button3.mousePressed(reset);
 
 
