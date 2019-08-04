@@ -227,7 +227,18 @@
 
 function touchStarted() {
 
-  if (introState === 1){
+  if (introState === 0){
+    introState = 1;
+    slide++;
+    audio.loop();
+    slideShow();
+  }
+
+  else if (introState === 1){
+    // do nothing
+  }
+
+  else if (introState === 2){
     paintLayer.clear();
     textLayer.clear();
     introState++;
@@ -236,7 +247,7 @@ function touchStarted() {
     writeTextUIAudio();
   }
 
-  if (introState === 2){
+  else if (introState === 3){
   setProperties(winMouseX, winMouseY);
   }
 }
@@ -265,7 +276,7 @@ function touchStarted() {
 
 function draw(){
 
-  if (introState < 2){
+  if (introState < 3){
       autoDraw();
   }
 
@@ -370,7 +381,7 @@ function autoSetProperties(){
 
   function reset() {
     paintLayer.clear();
-    textLayer.clear();
+    traceLayer.clear();
     if (!bool)
       invertTracing();
   }
