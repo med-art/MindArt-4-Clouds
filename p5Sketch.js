@@ -1,46 +1,32 @@
   // images
   let bg;
   let brush = [];
-
-  // bursh mechanics
+  // brush mechanics
   let angle1, segLength;
   let scalar = 30;
   let tempwinMouseX = 0;
   let tempwinMouseY = 0;
   let tempX = 100;
   let tempY = 100;
-  let dx;
-  let dy;
-
-
+  let dx, dy;
   // VARIABLES FOR TIME DELAY ON BRUSH
   let milliCounter;
   let milliTrack = 0;
-
   //BRUSH CHARACTERISTICS
   let milliComp = 10;
   let scatterAmount = 2;
-
-
   // COLOUR VARAIABLES
   let colHue;
   const colHueMin = 0;
   const colHueMax = 360;
-
   let colSat;
   const colSatMin = 0;
   const colSatMax = 255;
-
   let colBri;
   const colBriMin = 0;
   const colBriMax = 255;
-
   let colOpacity = 0.4;
-
   let colourBool = 0;
-
-  // Saved colours as discussed with Emma - see mood board
-
 
   let cloudHSB = [
     [180, 47, 25],
@@ -49,7 +35,6 @@
     [164, 12, 95],
     [176, 45, 19]
   ];
-
   let sunsetHSB = [
     [11, 53, 96],
     [13, 83, 91],
@@ -61,29 +46,21 @@
   const hueDrift = 3;
   const satDrift = 3;
   const rotateDrift = 0.2;
-
-
-  // STATE SWITCH
   let bool = 1;
   let brushTemp = 0;
-
-  // BUTTON TEXT
   let buttonText1state = 0;
   let buttonText2state = 0;
-
   let button1A, button1B, button2A, button2B, button3, button4;
-
-  var col;
-  var colSelect;
-
+  let col;
+  let colSelect;
   let wmax, hmax, longEdge, shortEdge, lmax;
-
   let audio;
+  let startState = 0;
 
 
-let startState = 0;
-  //button spacing
-  //margin from right
+  let autoX = 0, autoY = 0, pautoX = 0, pautoY = 0; // automated drawing mouse states
+
+  let textLayer, paintLayer, traceLayer;
 
   function preload() {
     bg = loadImage('assets/paper.jpg'); // background paper
@@ -93,32 +70,32 @@ let startState = 0;
 
     audio = loadSound('assets/audio.mp3');
 
-    button4 = createImg('assets/gui2.png');
-
   }
 
   function setup() {
     createCanvas(windowWidth, windowHeight);
+
+    textLayer = createGraphics(width, height);
+    paintLayer = createGraphics(width, height);
+    traceLayer = createGraphics(width, height);
+
     dimensionCalc();
-
     pixelDensity(1); // Ignores retina displays
-
     imageMode(CENTER); // centers loaded brushes
     blendMode(BLEND); // consider overlay and multiply
     colorMode(HSB, 360, 100, 100, 1)
+        paintLayer.colorMode(HSB, 360, 100, 100, 1);
+        traceLayer.colorMode(HSB, 360, 100, 100, 1);
     colHue = random(colHueMin, colHueMax);
     colSat = random(colSatMin, colSatMax);
-
-
     backdrop();
-
     segLength = windowWidth / 40; // length of delay between touch and paint or line // 15 is a good value
-
     strokeWeight(4); // for line work
     stroke(255, 0, 255); // for line work
 
-    writeTextUI();
-    writeTextUIAudio();
+    setProperties(0,0);
+    autoSetProperties();
+    slideShow();
   }
 
   function backdrop() {
@@ -147,10 +124,10 @@ let startState = 0;
     if (colourBool) {
       button1A.style('background-color', col);
       button1A.style('color', 'grey');
-      button1B.style('background-color', colSelect);
+      button1B.style('background-color', '#225E5E');
       button1B.style('color', 'white');
     } else {
-      button1A.style('background-color', colSelect);
+      button1A.style('background-color', '#EE6944');
       button1A.style('color', 'white');
       button1B.style('background-color', col);
       button1B.style('color', 'grey');
@@ -182,8 +159,8 @@ let startState = 0;
     noStroke();
 
 
-    button1A = createButton('Sunset Colours');
-    button1B = createButton('Sea Colours');
+    button1A = createButton('Warm colours');
+    button1B = createButton('Cool colours');
     button2A = createButton('Paint');
     button2B = createButton('Trace');
     button3 = createButton('New drawing');
@@ -199,7 +176,7 @@ let startState = 0;
     colSelect = color(0, 0, 0, 0.7);
     colH3 = color(355, 87, 74);
 
-    button1A.style('background-color', colSelect)
+    button1A.style('background-color', '#EE6944')
     button1A.style('font-size', '2vmax');
     button1A.style('color', 'white');
     button1A.style('width', '15vmax');
@@ -224,50 +201,55 @@ let startState = 0;
     button2B.style('border-radius', '0.25vmax')
     button2B.style('width', '12.5vmax');
     button2B.mousePressed(invertTracing);
-
     button3.style('background-color', colH3);
     button3.style('font-size', '2.5vmax');
     button3.style('color', 'white');
     button3.style('border-radius', '0.25vmax')
     button3.style('width', '20vmax')
     button3.mousePressed(reset);
-
-
   }
 
   function writeTextUIAudio() {
+
     textSize(longEdge / 50);
     fill(0);
     noStroke();
     let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
     let textMargin = longEdge / 100; // consolidate into above - no point having 2
-  button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
-  button4.style('font-size', '1.75vmax');
-  button4.style('color', 'black');
-  button4.style('border-radius', '3.5vmax')
-  button4.style('width', '7vmax')
-  button4.mousePressed(switchSound);
-
-
+    button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
+    button4.style('font-size', '1.75vmax');
+    button4.style('color', 'black');
+    button4.style('border-radius', '3.5vmax')
+    button4.style('width', '7vmax')
+    button4.mousePressed(switchSound);
   }
 
 
+function touchStarted() {
 
+  if (introState === 1){
+    paintLayer.clear();
+    textLayer.clear();
+    introState++;
+    writeTextUI();
+      button4 = createImg('assets/gui2.png'); //not ideal to have this here.
+    writeTextUIAudio();
+  }
 
-  function touchStarted() {
+  if (introState === 2){
+  setProperties(winMouseX, winMouseY);
+  }
+}
 
-
-
-
-    tempwinMouseX = ((windowWidth / 2) - winMouseX); // record position on downpress
-    tempwinMouseY = ((windowHeight / 2) - winMouseY); // record position on downpress
+  function setProperties(_x, _y) {
+    tempwinMouseX = ((windowWidth / 2) - _x); // record position on downpress
+    tempwinMouseY = ((windowHeight / 2) - _y); // record position on downpress
     brushTemp = int(random(1, 20));
-    tint(255, 0.01); // Display at half opacit
+  //  tint(255, 0.01); // Display at half opacit
 
     if (bool) {
-      image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+      //image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
       let swatchTemp = int(random(0, 5));
-      //console.log(swatchTemp);
 
       if (colourBool) {
         colHue = cloudHSB[swatchTemp][0];
@@ -278,36 +260,65 @@ let startState = 0;
         colSat = sunsetHSB[swatchTemp][1];
         colBri = sunsetHSB[swatchTemp][2];
       }
-
     }
   }
 
+function draw(){
+
+  if (introState < 2){
+      autoDraw();
+  }
+
+
+    backdrop();
+    image(paintLayer, width/2, height/2);
+    image(traceLayer, width/2, height/2);
+    image(textLayer, width/2, height/2);
+
+}
+
+function autoSetProperties(){
+  setProperties();
+  setTimeout(autoSetProperties, 5000);
+}
 
   function touchMoved() {
 
+    makeDrawing(winMouseX, winMouseY,pwinMouseX, pwinMouseY);
+  }
 
+  function autoDraw() {
+
+    pautoX = autoX;
+    pautoY = autoY;
+    autoX = autoX + (random(-50,55));
+    autoY = autoY + (random(-20,22));
+
+    makeDrawing(autoX % width, autoY % height, pautoX % width, pautoY % height);
+
+  }
+
+  function makeDrawing(_x, _y, pX, pY) {
     milliCounter = millis();
 
     if (bool) {
 
       if (milliCounter > milliTrack + milliComp) {
-        tint((colHue += random(-hueDrift, hueDrift)), (colSat += random(-satDrift, satDrift)), colBri, colOpacity); // Display at half opacity
+
 
         if (colSat < 10) {
           colSat += 30
         }
 
-        console.log('Hue = ' + colHue);
-        console.log('Saturation = ' + colSat);
-        console.log('Brightness = ' + colBri);
 
-        dx = winMouseX - tempX;
-        dy = winMouseY - tempY;
+
+        dx = _x - tempX;
+        dy = _y - tempY;
 
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
-        tempX = winMouseX - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
-        tempY = winMouseY - (sin(angle1) * segLength / 2);
-        scalar = constrain(100 * (random(3, abs(winMouseX - pwinMouseX)) / windowWidth), 0, 1.5);
+        tempX = _x - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
+        tempY = _y - (sin(angle1) * segLength / 2);
+        scalar = constrain(100 * (random(3, abs(_x - pX)) / windowWidth), 0, 1.5);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
@@ -315,49 +326,51 @@ let startState = 0;
         milliTrack = milliCounter;
       }
     } else {
-      strokeWeight(constrain(abs((winMouseY + winMouseX) - (pwinMouseX + pwinMouseY)), 0.3, 2)); // for line work
-      stroke(255, 0, 255); // for line work
-      line(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
-
+      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 2)); // for line work
+      traceLayer.stroke(255, 0, 255); // for line work
+      traceLayer.line(_x, _y, pX, pY);
+    }
   }
-}
 
-function switchSound() {
-  if (audio.isPlaying()) {
-  audio.stop();
-  button4.remove();
-button4 = createImg('assets/gui2.png');
+  function switchSound() {
+    if (audio.isPlaying()) {
+      audio.stop();
+      button4.remove();
+      button4 = createImg('assets/gui2.png');
+      writeTextUIAudio();
 
-writeTextUIAudio();
+    } else {
+      audio.loop();
+      button4.remove();
+      button4 = createImg('assets/gui1.png');
+      writeTextUIAudio();
+    }
 
-
-
-} else {
-audio.loop();
- button4.remove();
- button4 = createImg('assets/gui1.png');
- writeTextUIAudio();
-
-}
-
-return false;
-}
+    return false;
+  }
 
 
   function segment(rakeX, rakeY, a, rake, scalar) {
-    push();
 
-    translate(rakeX + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))), rakeY + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))));
+      paintLayer.tint((colHue += random(-hueDrift, hueDrift)), (colSat += random(-satDrift, satDrift)), colBri, colOpacity); // Display at half opacity
+    paintLayer.push();
+
+    paintLayer.translate(rakeX + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))), rakeY + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))));
     //translate(rakeX, rakeY);
-    rotate(a);
-    scale(scalar);
+    paintLayer.rotate(a);
+    paintLayer.scale(scalar);
 
-    image(rake, 0, 0, 0, 0);
-    pop();
+    paintLayer.image(rake, 0, 0, 0, 0);
+
+    paintLayer.pop();
+
+
+
   }
 
   function reset() {
-    backdrop();
+    paintLayer.clear();
+    textLayer.clear();
     if (!bool)
       invertTracing();
   }
