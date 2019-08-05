@@ -4,10 +4,10 @@ function eraseDrawing() {
     paintLayer.loadPixels();
     for (let y = (winMouseY - 25); y < (winMouseY + 25); y++) {
       for (let x = (winMouseX - 25); x < (winMouseX + 25); x++) {
-        if (dist(x, y, winMouseX, winMouseY) < 25) {
+        //if (dist(x, y, winMouseX, winMouseY) < 25) {
           let index = (x + y * width) * 4;
           paintLayer.pixels[index + 3] = 0; // alpha channel
-        }
+      //  }
       }
     }
     paintLayer.updatePixels();
