@@ -9,14 +9,14 @@ function writeTextUI() {
   button1B = createButton('Cool colours');
   button2A = createButton('Paint');
   button2B = createButton('Trace');
-  // button2C = createButton('Eraser');
+  button2C = createButton('Eraser');
   button3 = createButton('New drawing');
 
   button1A.position(lmax, windowHeight - lmax * 5);
   button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
   button2A.position(lmax, windowHeight - lmax * 10);
   button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
-  // button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
+  button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
 
   button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
 
@@ -50,12 +50,12 @@ function writeTextUI() {
   button2B.style('width', '12.5vmax');
   button2B.mousePressed(invertTracing);
 
-  // button2C.style('background-color', col)
-  // button2C.style('font-size', '2.5vmax');
-  // button2C.style('color', 'grey');
-  // button2C.style('border-radius', '0.25vmax')
-  // button2C.style('width', '12.5vmax');
-  // button2C.mousePressed(eraser);
+  button2C.style('background-color', col)
+  button2C.style('font-size', '2.5vmax');
+  button2C.style('color', 'grey');
+  button2C.style('border-radius', '0.25vmax')
+  button2C.style('width', '12.5vmax');
+  button2C.mousePressed(eraser);
 
   button3.style('background-color', colH3);
   button3.style('font-size', '2.5vmax');

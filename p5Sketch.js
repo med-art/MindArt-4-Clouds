@@ -92,7 +92,6 @@
     colorMode(HSB, 360, 100, 100, 1)
         paintLayer.colorMode(HSB, 360, 100, 100, 1);
         traceLayer.colorMode(HSB, 360, 100, 100, 1);
-        alphaErase = color(0, 0, 0, 0);
     colHue = random(colHueMin, colHueMax);
     colSat = random(colSatMin, colSatMax);
     backdrop();
@@ -225,13 +224,7 @@ function autoSetProperties(){
     }
   }
 
-  function eraseDrawing(){
 
-    traceLayer.set(winMouseX, winMouseY, alphaErase);
-    paintLayer.set(winMouseX, winMouseY, alphaErase);
-    traceLayer.updatePixels();
-    paintLayer.updatePixels();
-  }
 
   function autoDraw() {
 
@@ -272,28 +265,12 @@ function autoSetProperties(){
         milliTrack = milliCounter;
       }
     } else {
-      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 2)); // for line work
+      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 5)); // for line work
       traceLayer.stroke(255, 0, 255); // for line work
       traceLayer.line(_x, _y, pX, pY);
+      traceLayer.updatePixels();
     }
   }
-
-  // function switchSound() {
-  //   if (audio.isPlaying()) {
-  //     audio.stop();
-  //     button4.remove();
-  //     button4 = createImg('assets/gui2.png');
-  //     writeTextUIAudio();
-  //
-  //   } else {
-  //     audio.loop();
-  //     button4.remove();
-  //     button4 = createImg('assets/gui1.png');
-  //     writeTextUIAudio();
-  //   }
-  //
-  //   return false;
-  // }
 
 
   function segment(rakeX, rakeY, a, rake, scalar) {
@@ -307,7 +284,7 @@ paintLayer.imageMode(CENTER); // centers loaded brushes
     paintLayer.rotate(a);
 
     paintLayer.image(rake, 0, 0, 0, 0);
-
+paintLayer.imageMode(CORNER); // centers loaded brushes
     paintLayer.pop();
 
 
