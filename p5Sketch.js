@@ -13,7 +13,7 @@
   let milliCounter;
   let milliTrack = 0;
   //BRUSH CHARACTERISTICS
-  let milliComp = 10;
+  let milliComp = 5;
   let scatterAmount = 2;
   // COLOUR VARAIABLES
   let colHue;
@@ -27,6 +27,8 @@
   const colBriMax = 255;
   let colOpacity = 0.4;
   let colourBool = 0;
+
+
 
   let cloudHSB = [
     [180, 47, 25],
@@ -57,6 +59,10 @@
   let audio;
   let startState = 0;
 
+  let alphaErase;
+
+  let eraseState = 0;
+
 
   let autoX = 0, autoY = 0, pautoX = 0, pautoY = 0; // automated drawing mouse states
 
@@ -86,6 +92,7 @@
     colorMode(HSB, 360, 100, 100, 1)
         paintLayer.colorMode(HSB, 360, 100, 100, 1);
         traceLayer.colorMode(HSB, 360, 100, 100, 1);
+        alphaErase = color(0, 0, 0, 0);
     colHue = random(colHueMin, colHueMax);
     colSat = random(colSatMin, colSatMax);
     backdrop();
@@ -163,12 +170,14 @@
     button1B = createButton('Cool colours');
     button2A = createButton('Paint');
     button2B = createButton('Trace');
+    // button2C = createButton('Eraser');
     button3 = createButton('New drawing');
 
     button1A.position(lmax, windowHeight - lmax * 5);
     button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
     button2A.position(lmax, windowHeight - lmax * 10);
     button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
+    // button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
 
     button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
 
@@ -201,6 +210,14 @@
     button2B.style('border-radius', '0.25vmax')
     button2B.style('width', '12.5vmax');
     button2B.mousePressed(invertTracing);
+
+    // button2C.style('background-color', col)
+    // button2C.style('font-size', '2.5vmax');
+    // button2C.style('color', 'grey');
+    // button2C.style('border-radius', '0.25vmax')
+    // button2C.style('width', '12.5vmax');
+    // button2C.mousePressed(eraser);
+
     button3.style('background-color', colH3);
     button3.style('font-size', '2.5vmax');
     button3.style('color', 'white');
@@ -209,20 +226,33 @@
     button3.mousePressed(reset);
   }
 
-  function writeTextUIAudio() {
+  function eraser(){
 
-    textSize(longEdge / 50);
-    fill(0);
-    noStroke();
-    let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
-    let textMargin = longEdge / 100; // consolidate into above - no point having 2
-    button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
-    button4.style('font-size', '1.75vmax');
-    button4.style('color', 'black');
-    button4.style('border-radius', '3.5vmax')
-    button4.style('width', '7vmax')
-    button4.mousePressed(switchSound);
+    if (eraseState === 0){
+    eraseState = 1;
+        button2C.style('background-color', colSelect);
+    }
+    else {
+      eraseState = 0;
+     button2C.style('background-color', col);
+    }
+
   }
+
+  // function writeTextUIAudio() {
+  //
+  //   textSize(longEdge / 50);
+  //   fill(0);
+  //   noStroke();
+  //   let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
+  //   let textMargin = longEdge / 100; // consolidate into above - no point having 2
+  //   button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
+  //   button4.style('font-size', '1.75vmax');
+  //   button4.style('color', 'black');
+  //   button4.style('border-radius', '3.5vmax')
+  //   button4.style('width', '7vmax')
+  //   button4.mousePressed(switchSound);
+  // }
 
 
 function touchStarted() {
@@ -244,7 +274,7 @@ function touchStarted() {
     introState++;
     writeTextUI();
       button4 = createImg('assets/gui2.png'); //not ideal to have this here.
-    writeTextUIAudio();
+    //writeTextUIAudio();
   }
 
   else if (introState === 3){
@@ -289,13 +319,29 @@ function draw(){
 }
 
 function autoSetProperties(){
+
+
   setProperties();
+
   setTimeout(autoSetProperties, 5000);
+
 }
 
   function touchMoved() {
 
-    makeDrawing(winMouseX, winMouseY,pwinMouseX, pwinMouseY);
+    if (eraseState === 0 && introState === 3){
+    makeDrawing(winMouseX, winMouseY, pwinMouseX, pwinMouseY);}
+    else {
+      eraseDrawing();
+    }
+  }
+
+  function eraseDrawing(){
+
+    traceLayer.set(winMouseX, winMouseY, alphaErase);
+    paintLayer.set(winMouseX, winMouseY, alphaErase);
+    traceLayer.updatePixels();
+    paintLayer.updatePixels();
   }
 
   function autoDraw() {
@@ -329,7 +375,7 @@ function autoSetProperties(){
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = _x - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = _y - (sin(angle1) * segLength / 2);
-        scalar = constrain(100 * (random(3, abs(_x - pX)) / windowWidth), 0, 1.5);
+        scalar = constrain(100 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
 
 
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
@@ -343,22 +389,22 @@ function autoSetProperties(){
     }
   }
 
-  function switchSound() {
-    if (audio.isPlaying()) {
-      audio.stop();
-      button4.remove();
-      button4 = createImg('assets/gui2.png');
-      writeTextUIAudio();
-
-    } else {
-      audio.loop();
-      button4.remove();
-      button4 = createImg('assets/gui1.png');
-      writeTextUIAudio();
-    }
-
-    return false;
-  }
+  // function switchSound() {
+  //   if (audio.isPlaying()) {
+  //     audio.stop();
+  //     button4.remove();
+  //     button4 = createImg('assets/gui2.png');
+  //     writeTextUIAudio();
+  //
+  //   } else {
+  //     audio.loop();
+  //     button4.remove();
+  //     button4 = createImg('assets/gui1.png');
+  //     writeTextUIAudio();
+  //   }
+  //
+  //   return false;
+  // }
 
 
   function segment(rakeX, rakeY, a, rake, scalar) {
@@ -367,9 +413,9 @@ function autoSetProperties(){
     paintLayer.push();
 
     paintLayer.translate(rakeX + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))), rakeY + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))));
-    //translate(rakeX, rakeY);
-    paintLayer.rotate(a);
+
     paintLayer.scale(scalar);
+    paintLayer.rotate(a);
 
     paintLayer.image(rake, 0, 0, 0, 0);
 
