@@ -241,25 +241,17 @@ function autoSetProperties(){
     milliCounter = millis();
 
     if (bool) {
-
       if (milliCounter > milliTrack + milliComp) {
-
 
         if (colSat < 10) {
           colSat += 30
         }
-
-
-
         dx = _x - tempX;
         dy = _y - tempY;
-
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = _x - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = _y - (sin(angle1) * segLength / 2);
         scalar = constrain(100 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
-
-
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
 
         milliTrack = milliCounter;
@@ -268,27 +260,24 @@ function autoSetProperties(){
       traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 5)); // for line work
       traceLayer.stroke(255, 0, 255); // for line work
       traceLayer.line(_x, _y, pX, pY);
-      traceLayer.updatePixels();
+
     }
   }
 
 
   function segment(rakeX, rakeY, a, rake, scalar) {
 
-      paintLayer.tint((colHue += random(-hueDrift, hueDrift)), (colSat += random(-satDrift, satDrift)), colBri, colOpacity); // Display at half opacity
+    paintLayer.tint((colHue += random(-hueDrift, hueDrift)), (colSat += random(-satDrift, satDrift)), colBri, colOpacity); // Display at half opacity
     paintLayer.push();
-paintLayer.imageMode(CENTER); // centers loaded brushes
+    paintLayer.imageMode(CENTER); // centers loaded brushes
     paintLayer.translate(rakeX + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))), rakeY + (randomGaussian(-scatterAmount * (0.1 * scalar), scatterAmount * (0.1 * scalar))));
 
     paintLayer.scale(scalar);
     paintLayer.rotate(a);
 
     paintLayer.image(rake, 0, 0, 0, 0);
-paintLayer.imageMode(CORNER); // centers loaded brushes
+    paintLayer.imageMode(CORNER); // centers loaded brushes
     paintLayer.pop();
-
-
-
   }
 
   function reset() {
