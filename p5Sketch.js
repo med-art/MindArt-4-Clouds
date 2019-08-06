@@ -271,5 +271,15 @@
 
 
   function windowResized() {
-    setup(); // need to rewrite this to ensure image is saved
+    paintLayer.clear();
+    textLayer.clear();
+    traceLayer.clear();
+    button1A.remove();
+    button1B.remove();
+    button2A.remove();
+    button2B.remove();
+    button2C.remove();
+    button3.remove();
+    writeTextUI();
+
   }
