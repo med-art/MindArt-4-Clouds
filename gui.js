@@ -10,7 +10,7 @@ function writeTextUI() {
   button2A = createButton('Paint');
   button2B = createButton('Trace');
   button2C = createButton('Eraser');
-  button3 = createButton('New drawing');
+  button3 = createButton('Save and Restart');
 
   button1A.position(lmax, windowHeight - lmax * 5);
   button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
@@ -131,5 +131,5 @@ function eraser() {
 }
 
 function saveImage(){
-  save('test.jpg');
+  save('dreamscape'+month()+day()+hour()+second()+'.jpg');
 }
