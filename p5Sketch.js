@@ -89,7 +89,7 @@
     traceLayer = createGraphics(width, height);
 
     dimensionCalc();
-    //pixelDensity(1); // Ignores retina displays
+    pixelDensity(1); // Ignores retina displays
     imageMode(CENTER); // centers loaded brushes
     blendMode(BLEND); // consider overlay and multiply
     colorMode(HSB, 360, 100, 100, 1);
