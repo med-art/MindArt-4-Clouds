@@ -52,7 +52,7 @@
   let brushTemp = 0;
   let buttonText1state = 0;
   let buttonText2state = 0;
-  let button1A, button1B, button2A, button2B, button3;
+  let button1A, button1B, button2A, button2B, button3, button4;
   let col;
   let colSelect;
   let wmax, hmax, longEdge, shortEdge, lmax;
@@ -241,7 +241,7 @@
         milliTrack = milliCounter;
       }
     } else {
-      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 5)); // for line work
+      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 2.8)); // for line work
       traceLayer.stroke(255, 0, 255, 1); // for line work
       traceLayer.line(_x, _y, pX, pY);
 
@@ -265,7 +265,7 @@
   }
 
   function reset() {
-      saveImage();
+
     paintLayer.clear();
     traceLayer.clear();
     if (!bool)
@@ -283,6 +283,7 @@
     button2B.remove();
     button2C.remove();
     button3.remove();
+      button4.remove();
     writeTextUI();
 
   }

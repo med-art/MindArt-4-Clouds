@@ -10,7 +10,8 @@ function writeTextUI() {
   button2A = createButton('Paint');
   button2B = createButton('Trace');
   button2C = createButton('Eraser');
-  button3 = createButton('Save and Restart');
+  button3 = createButton('New Drawing');
+    button4 = createButton('Save');
 
   button1A.position(lmax, windowHeight - lmax * 5);
   button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
@@ -18,7 +19,8 @@ function writeTextUI() {
   button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
   button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
 
-  button3.position(windowWidth - (30 * lmax) - (lmax * 3), windowHeight - lmax * 5);
+  button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
+  button4.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 10);
 
   col = color(0, 0, 0, 0.2);
   colSelect = color(120, 75, 78, 0.7);
@@ -39,7 +41,7 @@ function writeTextUI() {
   button2A.style('background-color', colSelect)
   button2A.style('font-size', '2.5vmax');
   button2A.style('color', 'white');
-  button2A.mousePressed(invertTracing);
+  button2A.mousePressed(switchToTrace);
   button2A.style('border-radius', '0.25vmax')
   button2A.style('width', '12.5vmax');
 
@@ -48,7 +50,7 @@ function writeTextUI() {
   button2B.style('color', 'grey');
   button2B.style('border-radius', '0.25vmax')
   button2B.style('width', '12.5vmax');
-  button2B.mousePressed(invertTracing);
+  button2B.mousePressed(switchToPaint);
 
   button2C.style('background-color', col)
   button2C.style('font-size', '2.5vmax');
@@ -61,8 +63,15 @@ function writeTextUI() {
   button3.style('font-size', '2.5vmax');
   button3.style('color', 'white');
   button3.style('border-radius', '0.25vmax')
-  button3.style('width', '30vmax')
+  button3.style('width', '20vmax')
   button3.mousePressed(reset);
+
+  button4.style('background-color', '#333333');
+  button4.style('font-size', '2.5vmax');
+  button4.style('color', 'white');
+  button4.style('border-radius', '0.25vmax')
+  button4.style('width', '20vmax')
+  button4.mousePressed(saveImage);
 }
 
 // function writeTextUIAudio() {
@@ -98,21 +107,27 @@ function invertColourSet() {
 
 }
 
-function invertTracing() {
-  bool = !bool; // temporary invert function, will be overidden by UI
+function switchToTrace() {
+  bool = 1;
 
-  if (bool) {
     button2A.style('background-color', colSelect);
     button2A.style('color', 'white');
     button2B.style('background-color', col);
     button2B.style('color', 'grey');
-  } else {
+      eraseState = 1;
+      eraser();
+
+}
+
+function switchToPaint() {
+  bool = 0;
+
     button2A.style('background-color', col);
     button2A.style('color', 'grey');
     button2B.style('background-color', colSelect);
     button2B.style('color', 'white');
-
-  }
+      eraseState = 1; // revert to True for erase before passing back to eraser function, which inverts
+      eraser();
 }
 
 
