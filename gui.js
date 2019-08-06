@@ -18,7 +18,7 @@ function writeTextUI() {
   button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
   button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
 
-  button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
+  button3.position(windowWidth - (30 * lmax) - (lmax * 3), windowHeight - lmax * 5);
 
   col = color(0, 0, 0, 0.2);
   colSelect = color(120, 75, 78, 0.7);
@@ -61,7 +61,7 @@ function writeTextUI() {
   button3.style('font-size', '2.5vmax');
   button3.style('color', 'white');
   button3.style('border-radius', '0.25vmax')
-  button3.style('width', '20vmax')
+  button3.style('width', '30vmax')
   button3.mousePressed(reset);
 }
 
