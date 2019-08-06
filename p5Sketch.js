@@ -52,7 +52,7 @@
   let brushTemp = 0;
   let buttonText1state = 0;
   let buttonText2state = 0;
-  let button1A, button1B, button2A, button2B, button3, button4;
+  let button1A, button1B, button2A, button2B, button3;
   let col;
   let colSelect;
   let wmax, hmax, longEdge, shortEdge, lmax;
@@ -149,7 +149,6 @@
       textLayer.clear();
       introState++;
       writeTextUI();
-      button4 = createImg('assets/gui2.png'); //not ideal to have this here.
       //writeTextUIAudio();
     } else if (introState === 3) {
       setProperties(winMouseX, winMouseY);
