@@ -263,6 +263,7 @@
   }
 
   function reset() {
+      saveImage();
     paintLayer.clear();
     traceLayer.clear();
     if (!bool)

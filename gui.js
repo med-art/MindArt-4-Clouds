@@ -131,5 +131,5 @@ function eraser() {
 }
 
 function saveImage(){
-  save(test, jpg)
+  save('test.jpg');
 }
