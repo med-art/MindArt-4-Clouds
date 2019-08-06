@@ -92,6 +92,7 @@
     pixelDensity(1); // Ignores retina displays
     imageMode(CENTER); // centers loaded brushes
     blendMode(BLEND); // consider overlay and multiply
+    traceLayer.blendMode(LIGHTEST); // consider overlay and multiply
     colorMode(HSB, 360, 100, 100, 1);
     paintLayer.colorMode(HSB, 360, 100, 100, 1);
     traceLayer.colorMode(HSB, 360, 100, 100, 1);
@@ -195,7 +196,9 @@
     }
     backdrop();
     image(paintLayer, width / 2, height / 2);
+    blendMode(LIGHTEST);
     image(traceLayer, width / 2, height / 2);
+    blendMode(BLEND);
     image(textLayer, width / 2, height / 2);
 
   }
