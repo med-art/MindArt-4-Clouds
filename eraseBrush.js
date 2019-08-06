@@ -10,8 +10,8 @@ function eraseDrawing() {
     //
     //       paintLayer.set(x, y, color(255,0,0,0.5));
     paintLayer.noStroke();
-    paintLayer.fill(255,0,85,0.1);
-    paintLayer.circle(mouseX, mouseY, 80, 80);
+    paintLayer.fill(255,0,255,0.1);
+    paintLayer.circle(mouseX, mouseY, 50, 50);
 
         }
 
@@ -19,7 +19,7 @@ function eraseDrawing() {
           traceLayer.blendMode(BLEND);
           traceLayer.noStroke();
           traceLayer.fill(255,0,0,0.1);
-          traceLayer.circle(mouseX, mouseY, 80, 80);
+          traceLayer.circle(mouseX, mouseY, 40, 40);
           traceLayer.blendMode(LIGHTEST);
 
               }

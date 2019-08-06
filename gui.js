@@ -114,3 +114,18 @@ function invertTracing() {
 
   }
 }
+
+
+function eraser() {
+
+  if (eraseState === 0) {
+    eraseState = 1;
+    button2C.style('background-color', '#048bbd');
+        button2C.style('color', 'white');
+  } else {
+    eraseState = 0;
+    button2C.style('background-color', col);
+        button2C.style('color', 'grey');
+  }
+
+}

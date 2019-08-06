@@ -131,17 +131,6 @@
 
 
 
-  function eraser() {
-
-    if (eraseState === 0) {
-      eraseState = 1;
-      button2C.style('background-color', colSelect);
-    } else {
-      eraseState = 0;
-      button2C.style('background-color', col);
-    }
-
-  }
 
 
 
@@ -195,6 +184,7 @@
       autoDraw();
     }
     backdrop();
+    blendMode(DARKEST);
     image(paintLayer, width / 2, height / 2);
     blendMode(LIGHTEST);
     image(traceLayer, width / 2, height / 2);
