@@ -6,7 +6,7 @@ let introState = 0; // 3 way state. State 0 is intro begun, state 1 is intro ove
 function slideShow() {
   audio.loop();
 
-  if (slide === introText.length) {
+  if (slide === introText.length-1) {
     introState = 2;
 
   }
