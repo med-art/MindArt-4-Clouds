@@ -64,13 +64,16 @@
   let eraseState = 0;
 
 
-  let autoX = 0, autoY = 0, pautoX = 0, pautoY = 0; // automated drawing mouse states
+  let autoX = 0,
+    autoY = 0,
+    pautoX = 0,
+    pautoY = 0; // automated drawing mouse states
 
   let textLayer, paintLayer, traceLayer;
 
   function preload() {
     bg = loadImage('assets/paper.jpg'); // background paper
-    for (i = 1; i < 21; i++) {
+    for (let i = 1; i < 21; i++) {
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
 
@@ -89,9 +92,9 @@
     //pixelDensity(1); // Ignores retina displays
     imageMode(CENTER); // centers loaded brushes
     blendMode(BLEND); // consider overlay and multiply
-    colorMode(HSB, 360, 100, 100, 1)
-        paintLayer.colorMode(HSB, 360, 100, 100, 1);
-        traceLayer.colorMode(HSB, 360, 100, 100, 1);
+    colorMode(HSB, 360, 100, 100, 1);
+    paintLayer.colorMode(HSB, 360, 100, 100, 1);
+    traceLayer.colorMode(HSB, 360, 100, 100, 1);
     colHue = random(colHueMin, colHueMax);
     colSat = random(colSatMin, colSatMax);
     backdrop();
@@ -99,7 +102,7 @@
     strokeWeight(4); // for line work
     stroke(255, 0, 255); // for line work
 
-    setProperties(0,0);
+    setProperties(0, 0);
     autoSetProperties();
     slideShow();
   }
@@ -127,15 +130,14 @@
 
 
 
-  function eraser(){
+  function eraser() {
 
-    if (eraseState === 0){
-    eraseState = 1;
-        button2C.style('background-color', colSelect);
-    }
-    else {
+    if (eraseState === 0) {
+      eraseState = 1;
+      button2C.style('background-color', colSelect);
+    } else {
       eraseState = 0;
-     button2C.style('background-color', col);
+      button2C.style('background-color', col);
     }
 
   }
@@ -143,38 +145,32 @@
 
 
 
-function touchStarted() {
+  function touchStarted() {
 
-  if (introState === 0){
-    introState = 1;
-    slide++;
-    audio.loop();
-    slideShow();
-  }
-
-  else if (introState === 1){
-    // do nothing
-  }
-
-  else if (introState === 2){
-    paintLayer.clear();
-    textLayer.clear();
-    introState++;
-    writeTextUI();
+    if (introState === 0) {
+      introState = 1;
+      slide++;
+      audio.loop();
+      slideShow();
+    } else if (introState === 1) {
+      // do nothing
+    } else if (introState === 2) {
+      paintLayer.clear();
+      textLayer.clear();
+      introState++;
+      writeTextUI();
       button4 = createImg('assets/gui2.png'); //not ideal to have this here.
-    //writeTextUIAudio();
+      //writeTextUIAudio();
+    } else if (introState === 3) {
+      setProperties(winMouseX, winMouseY);
+    }
   }
-
-  else if (introState === 3){
-  setProperties(winMouseX, winMouseY);
-  }
-}
 
   function setProperties(_x, _y) {
     tempwinMouseX = ((windowWidth / 2) - _x); // record position on downpress
     tempwinMouseY = ((windowHeight / 2) - _y); // record position on downpress
     brushTemp = int(random(1, 20));
-  //  tint(255, 0.01); // Display at half opacit
+    //  tint(255, 0.01); // Display at half opacit
 
     if (bool) {
       //image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
@@ -192,34 +188,28 @@ function touchStarted() {
     }
   }
 
-function draw(){
+  function draw() {
 
-  if (introState < 3){
+    if (introState < 3) {
       autoDraw();
+    }
+    backdrop();
+    image(paintLayer, width / 2, height / 2);
+    image(traceLayer, width / 2, height / 2);
+    image(textLayer, width / 2, height / 2);
+
   }
 
-
-    backdrop();
-    image(paintLayer, width/2, height/2);
-    image(traceLayer, width/2, height/2);
-    image(textLayer, width/2, height/2);
-
-}
-
-function autoSetProperties(){
-
-
-  setProperties();
-
-  setTimeout(autoSetProperties, 5000);
-
-}
+  function autoSetProperties() {
+    setProperties();
+    setTimeout(autoSetProperties, 5000);
+  }
 
   function touchMoved() {
 
-    if (eraseState === 0 && introState === 3){
-    makeDrawing(winMouseX, winMouseY, pwinMouseX, pwinMouseY);}
-    else {
+    if (eraseState === 0 && introState === 3) {
+      makeDrawing(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+    } else {
       eraseDrawing();
     }
   }
@@ -230,8 +220,8 @@ function autoSetProperties(){
 
     pautoX = autoX;
     pautoY = autoY;
-    autoX = autoX + (random(-50,55));
-    autoY = autoY + (random(-20,22));
+    autoX = autoX + (random(-50, 55));
+    autoY = autoY + (random(-20, 22));
 
     makeDrawing(autoX % width, autoY % height, pautoX % width, pautoY % height);
 
@@ -258,7 +248,7 @@ function autoSetProperties(){
       }
     } else {
       traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 5)); // for line work
-      traceLayer.stroke(255, 0, 255); // for line work
+      traceLayer.stroke(255, 0, 255, 1); // for line work
       traceLayer.line(_x, _y, pX, pY);
 
     }
