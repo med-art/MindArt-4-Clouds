@@ -63,6 +63,8 @@
 
   let eraseState = 0;
 
+  let saveState = 1;
+
 
   let autoX = 0,
     autoY = 0,
