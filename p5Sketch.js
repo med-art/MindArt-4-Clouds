@@ -241,7 +241,7 @@
         milliTrack = milliCounter;
       }
     } else {
-      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.3, 2.8)); // for line work
+      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), .8, 3.5)); // for line work
       traceLayer.stroke(255, 0, 255, 1); // for line work
       traceLayer.line(_x, _y, pX, pY);
 
