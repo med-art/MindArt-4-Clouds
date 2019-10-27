@@ -28,17 +28,24 @@
     textSize(windowWidth / 50);
     fill(0);
     noStroke();
-
+    button1 = createImg("assets/icon1.0.png");
+    button1 = createImg("assets/icon1.2.png");
+    button1.remove();
     button1 = createImg("assets/icon1.1.png");
     button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
     button1.position(0, height - (14 * vMax));
     button1.mousePressed(switchToPaint);
 
+    button2 = createImg("assets/icon2.1.png");
+    button2.remove();
     button2 = createImg("assets/icon2.0.png");
     button2.style('width', '14vmax');
     button2.position(23.5 * vMax, height - (14 * vMax));
     button2.mousePressed(switchToTrace);
 
+    button3 = createImg("assets/icon3.1.png");
+    button3 = createImg("assets/icon3.2.png");
+    button3.remove();
     button3 = createImg("assets/icon3.0.png");
     button3.style('width', '21vmax');
     button3.position(36.5 * vMax, height - (14 * vMax));
