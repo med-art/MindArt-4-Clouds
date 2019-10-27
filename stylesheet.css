@@ -1,10 +1,10 @@
-html, body, div {
+.colourscape {
   height: 100%;
-  width:100%;
   overscroll-behavior: none;
   position: fixed;
-
 }
+
+
 .loadingclass {
   margin: 0;
 position: absolute;

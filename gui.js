@@ -29,6 +29,7 @@
     fill(0);
     noStroke();
     button1 = createImg("assets/icon1.0.png");
+    button1.remove();
     button1 = createImg("assets/icon1.2.png");
     button1.remove();
     button1 = createImg("assets/icon1.1.png");
@@ -44,6 +45,7 @@
     button2.mousePressed(switchToTrace);
 
     button3 = createImg("assets/icon3.1.png");
+    button3.remove();
     button3 = createImg("assets/icon3.2.png");
     button3.remove();
     button3 = createImg("assets/icon3.0.png");
