@@ -1,150 +1,191 @@
-function writeTextUI() {
+  let button1A, button1B, button2A, button2B;
+  let col, colSelect;
+  let resetButton, saveButton;
 
-  textSize(windowWidth / 50);
-  fill(0);
-  noStroke();
+  let button1, button2, button3;
 
+  let eraserVersion = 0; // erase paint = 0, erase trace = 1;
 
-  button1A = createButton('Warm colours');
-  button1B = createButton('Cool colours');
-  button2A = createButton('Paint');
-  button2B = createButton('Trace');
-  button2C = createButton('Eraser');
-  button3 = createButton('New Drawing');
-    button4 = createButton('Save');
+  function calcDimensions() {
 
-  button1A.position(lmax, windowHeight - lmax * 5);
-  button1B.position((lmax * 16) + lmax, windowHeight - lmax * 5); // 16 because 16 characters in 'Sunset Colours'
-  button2A.position(lmax, windowHeight - lmax * 10);
-  button2B.position(lmax * 13.5 + lmax, windowHeight - lmax * 10); // 7 because 7 characters in Paint
-  button2C.position(lmax * 27 + lmax, windowHeight - lmax * 10);
+    wmax = width / 100;
+    hmax = height / 100;
+    vW = width / 100;
 
-  button3.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 5);
-  button4.position(windowWidth - (20 * lmax) - (lmax * 3), windowHeight - lmax * 10);
-
-  col = color(0, 0, 0, 0.2);
-  colSelect = color(120, 75, 78, 0.7);
-  colH3 = color(355, 65, 80);
-
-  button1A.style('background-color', '#EE6944')
-  button1A.style('font-size', '2vmax');
-  button1A.style('color', 'white');
-  button1A.style('width', '15vmax');
-  button1A.mousePressed(invertColourSet);
-
-  button1B.style('background-color', '#4B5E5E')
-  button1B.style('font-size', '2vmax');
-  button1B.style('color', 'grey');
-  button1B.style('width', '15vmax');
-  button1B.mousePressed(invertColourSet);
-
-  button2A.style('background-color', colSelect)
-  button2A.style('font-size', '2.5vmax');
-  button2A.style('color', 'white');
-  button2A.mousePressed(switchToTrace);
-  button2A.style('border-radius', '0.25vmax')
-  button2A.style('width', '12.5vmax');
-
-  button2B.style('background-color', col)
-  button2B.style('font-size', '2.5vmax');
-  button2B.style('color', 'grey');
-  button2B.style('border-radius', '0.25vmax')
-  button2B.style('width', '12.5vmax');
-  button2B.mousePressed(switchToPaint);
-
-  button2C.style('background-color', col)
-  button2C.style('font-size', '2.5vmax');
-  button2C.style('color', 'grey');
-  button2C.style('border-radius', '0.25vmax')
-  button2C.style('width', '12.5vmax');
-  button2C.mousePressed(eraser);
-
-  button3.style('background-color', colH3);
-  button3.style('font-size', '2.5vmax');
-  button3.style('color', 'white');
-  button3.style('border-radius', '0.25vmax')
-  button3.style('width', '20vmax')
-  button3.mousePressed(reset);
-
-  button4.style('background-color', '#333333');
-  button4.style('font-size', '2.5vmax');
-  button4.style('color', 'white');
-  button4.style('border-radius', '0.25vmax')
-  button4.style('width', '20vmax')
-  button4.mousePressed(saveImage);
-}
-
-// function writeTextUIAudio() {
-//
-//   textSize(longEdge / 50);
-//   fill(0);
-//   noStroke();
-//   let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
-//   let textMargin = longEdge / 100; // consolidate into above - no point having 2
-//   button4.position(windowWidth - (10 * vmax) - (textMargin), vmax * 1);
-//   button4.style('font-size', '1.75vmax');
-//   button4.style('color', 'black');
-//   button4.style('border-radius', '3.5vmax')
-//   button4.style('width', '7vmax')
-//   button4.mousePressed(switchSound);
-// }
-
-function invertColourSet() {
-
-  colourBool = !colourBool;
-
-  if (colourBool) {
-    button1A.style('background-color', '#EDC8BE');
-    button1A.style('color', 'grey');
-    button1B.style('background-color', '#225E5E');
-    button1B.style('color', 'white');
-  } else {
-    button1A.style('background-color', '#EE6944');
-    button1A.style('color', 'white');
-    button1B.style('background-color', '#4B5E5E');
-    button1B.style('color', 'grey');
+    if (width > height) {
+      vMax = width / 100;
+      vMin = height / 100;
+    } else {
+      vMax = height / 100;
+      vMin = width / 100;
+    }
   }
 
-}
-
-function switchToTrace() {
-  bool = 1;
-
-    button2A.style('background-color', colSelect);
-    button2A.style('color', 'white');
-    button2B.style('background-color', col);
-    button2B.style('color', 'grey');
-      eraseState = 1;
-      eraser();
-
-}
-
-function switchToPaint() {
-  bool = 0;
-
-    button2A.style('background-color', col);
-    button2A.style('color', 'grey');
-    button2B.style('background-color', colSelect);
-    button2B.style('color', 'white');
-      eraseState = 1; // revert to True for erase before passing back to eraser function, which inverts
-      eraser();
-}
 
 
-function eraser() {
+  function writeTextUI() {
 
-  if (eraseState === 0) {
-    eraseState = 1;
-    button2C.style('background-color', '#048bbd');
-        button2C.style('color', 'white');
-  } else {
+    textSize(windowWidth / 50);
+    fill(0);
+    noStroke();
+
+    button1 = createImg("assets/icon1.1.png");
+    button1.style('width', '28vmax'); // 28 is 1.75 * 16.
+    button1.position(0, height - (16 * vMax));
+    button1.mousePressed(switchToPaint);
+
+    button2 = createImg("assets/icon2.0.png");
+    button2.style('width', '16vmax');
+    button2.position(28 * vMax, height - (16 * vMax));
+    button2.mousePressed(switchToTrace);
+
+    button3 = createImg("assets/icon3.0.png");
+    button3.style('width', '24vmax');
+    button3.position(44 * vMax, height - (16 * vMax));
+    button3.mousePressed(eraser);
+
+    saveButton = createButton("Save");
+    saveButton.class("select");
+    saveButton.style('font-size', '2.6vmax');
+    saveButton.style('height', '4.5vmax');
+    saveButton.position(width - (15 * vMax), height - (12.5 * vMax));
+    saveButton.mousePressed(saveImage);
+
+    resetButton = createButton("New");
+    resetButton.class("select");
+    resetButton.style('font-size', '2.6vmax');
+    resetButton.style('height', '4.5vmax');
+    resetButton.position(width - (15 * vMax), height - (6.5 * vMax));
+    resetButton.mousePressed(reset);
+
+    fsButton = createImg('assets/enterFS.png');
+    fsButton.style('height', '4.5vMax');
+    fsButton.position(width-(7.5 * vMax), 1.5 * vMax);
+    fsButton.mousePressed(fs);
+
+  }
+
+
+  function resetButtons(){
+    //reset all buttons// would be nice to replace this at some point
+    button3.remove();
+    button3 = createImg("assets/icon3.0.png");
+    button3.style('width', '24vmax');
+    button3.position(44 * vMax, height - (16 * vMax));
+    button3.mousePressed(eraser);
+
+    button2.remove();
+    button2 = createImg("assets/icon2.0.png");
+    button2.style('width', '16vmax');
+    button2.position(28 * vMax, height - (16 * vMax));
+    button2.mousePressed(switchToTrace);
+
+    button1.remove();
+    button1 = createImg("assets/icon1.0.png");
+    button1.style('width', '28vmax'); // 28 is 1.75 * 16.
+    button1.position(0, height - (16 * vMax));
+    button1.mousePressed(switchToPaint);
+
+  }
+
+
+  function switchToPaint() {
+
     eraseState = 0;
-    button2C.style('background-color', col);
-        button2C.style('color', 'grey');
+    eraserVersion = 0;
+    resetButtons();
+
+if (bool){
+colourBool = !colourBool;
+}
+
+if (!colourBool){
+          button1.remove();
+          button1 = createImg("assets/icon1.1.png");
+          button1.style('width', '28vmax'); // 28 is 1.75 * 16.
+          button1.position(0, height - (16 * vMax));
+          button1.mousePressed(switchToPaint);
+}
+else {
+
+          button1.remove();
+          button1 = createImg("assets/icon1.2.png");
+          button1.style('width', '28vmax'); // 28 is 1.75 * 16.
+          button1.position(0, height - (16 * vMax));
+          button1.mousePressed(switchToPaint);
+}
+
+
+
+
+
+        bool = 1;
+
+
+
   }
 
-}
+  function switchToTrace() {
 
-function saveImage(){
-  save('dreamscape'+month()+day()+hour()+second()+'.jpg');
-}
+    bool = 0;
+    eraseState = 0; // revert to True for erase before passing back to eraser function, which inverts
+    eraserVersion = 0;
+    resetButtons();
+
+    button2.remove();
+    button2 = createImg("assets/icon2.1.png");
+    button2.style('width', '16vmax');
+    button2.position(28 * vMax, height - (16 * vMax));
+    button2.mousePressed(switchToTrace);
+
+
+  }
+
+
+  function eraser() {
+
+    resetButtons();
+
+    if (eraseState === 1) {
+      eraserVersion = !eraserVersion;
+      console.log(eraserVersion);
+    }
+
+    eraseState = 1;
+
+    if (eraserVersion) {
+      button3.remove();
+      button3 = createImg("assets/icon3.1.png");
+      button3.style('width', '24vmax');
+      button3.position(44 * vMax, height - (16 * vMax));
+      button3.mousePressed(eraser);
+    } else {
+      button3.remove();
+      button3 = createImg("assets/icon3.2.png");
+      button3.style('width', '24vmax');
+      button3.position(44 * vMax, height - (16 * vMax));
+      button3.mousePressed(eraser);
+    }
+
+  }
+
+  function saveImage() {
+    save('colourscape' + month() + day() + hour() + second() + '.jpg');
+  }
+
+
+  function fs(){
+
+
+   if (!fsBool){
+     fullscreen(1);
+     fsBool = 1;
+   }
+
+   else{
+
+     fullscreen(0);
+     fsBool = 0;
+
+   }
+ }

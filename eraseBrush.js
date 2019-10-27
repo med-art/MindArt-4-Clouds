@@ -1,14 +1,9 @@
 function eraseDrawing() {
 
-  if (bool) {
-    // paintLayer.loadPixels();
-    // for (let y = (winMouseY - 50); y < (winMouseY + 50); y+=(random(1,5))) {
-    //   for (let x = (winMouseX - 50); x < (winMouseX + 50); x+=(random(1,5))) {
-    //     if (dist(x, y, winMouseX, winMouseY) < 50) {
-    //       //let index = (x + y * windowWidth) * 4;
-    //       //paintLayer.pixels[index + 3] = 0; // alpha channel
-    //
-    //       paintLayer.set(x, y, color(255,0,0,0.5));
+  console.log(eraserVersion);
+
+  if (eraserVersion) {
+
     paintLayer.noStroke();
     paintLayer.fill(255,0,255,0.1);
     paintLayer.circle(mouseX, mouseY, 50, 50);

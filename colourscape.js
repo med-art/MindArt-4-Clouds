@@ -52,10 +52,8 @@
   let brushTemp = 0;
   let buttonText1state = 0;
   let buttonText2state = 0;
-  let button1A, button1B, button2A, button2B, button3, button4;
-  let col;
-  let colSelect;
-  let wmax, hmax, longEdge, shortEdge, lmax;
+
+  let wmax, hmax, vMax;
   let audio;
   let startState = 0;
 
@@ -64,6 +62,8 @@
   let eraseState = 0;
 
   let saveState = 1;
+
+  let buttonTEST;
 
 
   let autoX = 0,
@@ -81,6 +81,9 @@
 
     audio = loadSound('assets/audio.mp3');
 
+
+
+
   }
 
   function setup() {
@@ -90,7 +93,7 @@
     paintLayer = createGraphics(width, height);
     traceLayer = createGraphics(width, height);
 
-    dimensionCalc();
+    calcDimensions();
     pixelDensity(1); // Ignores retina displays
     imageMode(CENTER); // centers loaded brushes
     blendMode(BLEND); // consider overlay and multiply
@@ -113,20 +116,6 @@
   function backdrop() {
     noTint();
     image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight); // display backgrond
-  }
-
-  function dimensionCalc() {
-    wmax = width / 100;
-    hmax = height / 100;
-    if (width > height) {
-      longEdge = width;
-      shortEdge = height;
-      lmax = width / 100;
-    } else {
-      longEdge = height;
-      shortEdge = width;
-      lmax = height / 100;
-    }
   }
 
 
@@ -241,9 +230,12 @@
         milliTrack = milliCounter;
       }
     } else {
-      traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), .8, 3.5)); // for line work
-      traceLayer.stroke(255, 0, 255, 1); // for line work
-      traceLayer.line(_x, _y, pX, pY);
+
+          for (let i = 0; i < 5; i++){
+        traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), .8, 3.5)); // for line work
+        traceLayer.stroke(255, 0, 255, 0.4); // for line work
+        traceLayer.line(_x+random(-3,3), _y+random(-3,3), pX+random(-3,3), pY+random(-3,3));
+      }
 
     }
   }
@@ -283,6 +275,7 @@
     button2B.remove();
     button2C.remove();
     button3.remove();
+    resetButton.remove();
       button4.remove();
     writeTextUI();
 
