@@ -31,35 +31,35 @@
 
     button1 = createImg("assets/icon1.1.png");
     button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
-    button1.position(0, height - (12 * vMax));
+    button1.position(0, height - (14 * vMax));
     button1.mousePressed(switchToPaint);
 
     button2 = createImg("assets/icon2.0.png");
     button2.style('width', '14vmax');
-    button2.position(23.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (14 * vMax));
     button2.mousePressed(switchToTrace);
 
     button3 = createImg("assets/icon3.0.png");
     button3.style('width', '21vmax');
-    button3.position(36.5 * vMax, height - (12 * vMax));
+    button3.position(36.5 * vMax, height - (14 * vMax));
     button3.mousePressed(eraser);
 
     saveButton = createButton("Save");
     saveButton.class("select");
     saveButton.style('font-size', '2.6vmax');
-    saveButton.style('height', '4.5vmax');
-    saveButton.position(width - (15 * vMax), height - (12.5 * vMax));
+    saveButton.style('height', '4vmax');
+    saveButton.position(width - (13.5 * vMax), height - (12.5 * vMax));
     saveButton.mousePressed(saveImage);
 
     resetButton = createButton("New");
     resetButton.class("select");
     resetButton.style('font-size', '2.6vmax');
-    resetButton.style('height', '4.5vmax');
-    resetButton.position(width - (15 * vMax), height - (6.5 * vMax));
+    resetButton.style('height', '4vmax');
+    resetButton.position(width - (13.5 * vMax), height - (6.5 * vMax));
     resetButton.mousePressed(reset);
 
     fsButton = createImg('assets/enterFS.png');
-    fsButton.style('height', '4.5vMax');
+    fsButton.style('height', '4vmax');
     fsButton.position(width-(7.5 * vMax), 1.5 * vMax);
     fsButton.mousePressed(fs);
 
@@ -71,19 +71,19 @@
     button3.remove();
     button3 = createImg("assets/icon3.0.png");
     button3.style('width', '21vmax');
-    button3.position(36.5 * vMax, height - (12 * vMax));
+    button3.position(36.5 * vMax, height - (14 * vMax));
     button3.mousePressed(eraser);
 
     button2.remove();
     button2 = createImg("assets/icon2.0.png");
     button2.style('width', '14vmax');
-    button2.position(23.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (14 * vMax));
     button2.mousePressed(switchToTrace);
 
     button1.remove();
     button1 = createImg("assets/icon1.0.png");
     button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
-    button1.position(0, height - (12 * vMax));
+    button1.position(0, height - (14 * vMax));
     button1.mousePressed(switchToPaint);
 
   }
@@ -103,7 +103,7 @@ if (!colourBool){
           button1.remove();
           button1 = createImg("assets/icon1.1.png");
           button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
-          button1.position(0, height - (12 * vMax));
+          button1.position(0, height - (14 * vMax));
           button1.mousePressed(switchToPaint);
 }
 else {
@@ -111,7 +111,7 @@ else {
           button1.remove();
           button1 = createImg("assets/icon1.2.png");
           button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
-          button1.position(0, height - (12 * vMax));
+          button1.position(0, height - (14 * vMax));
           button1.mousePressed(switchToPaint);
 }
 
@@ -135,7 +135,7 @@ else {
     button2.remove();
     button2 = createImg("assets/icon2.1.png");
     button2.style('width', '14vmax');
-    button2.position(23.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (14 * vMax));
     button2.mousePressed(switchToTrace);
 
 
@@ -157,13 +157,13 @@ else {
       button3.remove();
       button3 = createImg("assets/icon3.1.png");
       button3.style('width', '21vmax');
-      button3.position(36.5 * vMax, height - (12 * vMax));
+      button3.position(36.5 * vMax, height - (14 * vMax));
       button3.mousePressed(eraser);
     } else {
       button3.remove();
       button3 = createImg("assets/icon3.2.png");
       button3.style('width', '21vmax');
-      button3.position(36.5 * vMax, height - (12 * vMax));
+      button3.position(36.5 * vMax, height - (14 * vMax));
       button3.mousePressed(eraser);
     }
 
