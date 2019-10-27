@@ -36,12 +36,12 @@
 
     button2 = createImg("assets/icon2.0.png");
     button2.style('width', '14vmax');
-    button2.position(24.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (12 * vMax));
     button2.mousePressed(switchToTrace);
 
     button3 = createImg("assets/icon3.0.png");
     button3.style('width', '21vmax');
-    button3.position(38.5 * vMax, height - (12 * vMax));
+    button3.position(36.5 * vMax, height - (12 * vMax));
     button3.mousePressed(eraser);
 
     saveButton = createButton("Save");
@@ -71,13 +71,13 @@
     button3.remove();
     button3 = createImg("assets/icon3.0.png");
     button3.style('width', '21vmax');
-    button3.position(38.5 * vMax, height - (12 * vMax));
+    button3.position(36.5 * vMax, height - (12 * vMax));
     button3.mousePressed(eraser);
 
     button2.remove();
     button2 = createImg("assets/icon2.0.png");
     button2.style('width', '14vmax');
-    button2.position(24.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (12 * vMax));
     button2.mousePressed(switchToTrace);
 
     button1.remove();
@@ -135,7 +135,7 @@ else {
     button2.remove();
     button2 = createImg("assets/icon2.1.png");
     button2.style('width', '14vmax');
-    button2.position(24.5 * vMax, height - (12 * vMax));
+    button2.position(23.5 * vMax, height - (12 * vMax));
     button2.mousePressed(switchToTrace);
 
 
@@ -157,13 +157,13 @@ else {
       button3.remove();
       button3 = createImg("assets/icon3.1.png");
       button3.style('width', '21vmax');
-      button3.position(38.5 * vMax, height - (12 * vMax));
+      button3.position(36.5 * vMax, height - (12 * vMax));
       button3.mousePressed(eraser);
     } else {
       button3.remove();
       button3 = createImg("assets/icon3.2.png");
       button3.style('width', '21vmax');
-      button3.position(38.5 * vMax, height - (12 * vMax));
+      button3.position(36.5 * vMax, height - (12 * vMax));
       button3.mousePressed(eraser);
     }
 
