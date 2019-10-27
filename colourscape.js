@@ -144,7 +144,7 @@
     } else if (introState === 3) {
       setProperties(winMouseX, winMouseY);
     }
-    return false;
+    //return false;
   }
 
   function setProperties(_x, _y) {
