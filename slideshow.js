@@ -1,6 +1,6 @@
-let introText = ["Touch the screen to begin", "Watching", "Listening", "Imagining", "What do you see? Feel?", "Draw your own dreamscape", "Find your rhythm with the paint", "Then 'trace' where your mind takes you", "Touch here to begin"];
+let introText = ["Touch ", "Look", "Listen", "Touch"];
 let slide = 0;
-let delayTime = 70;
+let delayTime = 8000;
 let introState = 0; // 3 way state. State 0 is intro begun, state 1 is intro over and waiting for input, state 2 is active painting
 
 function slideShow() {
