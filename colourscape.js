@@ -222,7 +222,7 @@
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = _x - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = _y - (sin(angle1) * segLength / 2);
-        scalar = constrain(100 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
+        scalar = constrain(50 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
 
         milliTrack = milliCounter;
