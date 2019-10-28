@@ -1,29 +1,73 @@
-let introText = ["Touch ", "Look", "Listen", "Touch"];
+
+let introText = ["Touch", "Look", "Listen", "Touch"];
+
+let appCol = "#f1b300";
+
 let slide = 0;
 let delayTime = 8000;
-let introState = 0; // 3 way state. State 0 is intro begun, state 1 is intro over and waiting for input, state 2 is active painting
+let introState = 0;
+let noiseScale=2;
+
+function mousePressed(){
+
+
+  if (introState < 3){
+
+
+  if (audio.isPlaying()){
+
+  }
+  else {
+        audio.loop(5);
+      }
+
+}
+
+if (slide === 0){
+  slide++;
+  slideShow();
+}
+
+ return false;
+}
 
 function slideShow() {
-  audio.loop();
 
-  if (slide === introText.length-1) {
-    introState = 2;
+  if (slide === 0){
+
 
   }
 
-  if (slide < introText.length) {
-    textLayer.blendMode(BLEND)
+  if (slide === introText.length) {
     textLayer.clear();
-    textLayer.fill(color("#1B4643"));
-    textLayer.textSize(vMax * 5);
+    introState = 3;
+    writeTextUI();
+     imageMode(CENTER)
+    paintLayer.clear();
+
+    //restart();
+    counter = 0;
+  }
+
+  else if (slide < introText.length) {
+
+    textLayer.clear();
+    textLayer.fill(255, 5);
+    textLayer.textSize(vMax*8);
     textLayer.textAlign(CENTER, CENTER);
     textLayer.rectMode(CENTER);
-    textLayer.text(introText[slide], width / 2, hmax * 50, width * 0.8, height);
+    textLayer.text(introText[slide], width+(width/2), (height/8)*(slide+2));
 
 if (slide > 0){
+
+if (slide === introText.length-1){
+  delayTime = 10000;
+}
+
       slide++;
+      console.log(slide);
       setTimeout(slideShow, delayTime);
-    }
+}
 
   }
 }

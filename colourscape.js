@@ -78,12 +78,7 @@
     for (let i = 1; i < 21; i++) {
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
-
     audio = loadSound('assets/audio.mp3');
-
-
-
-
   }
 
   function setup() {
@@ -110,6 +105,8 @@
 
     setProperties(0, 0);
     autoSetProperties();
+
+    textLayer = createGraphics(windowWidth, windowHeight);
     slideShow();
   }
 
@@ -118,45 +115,23 @@
     image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight); // display backgrond
   }
 
-
-
-
-
-
-
-
-
   function touchStarted() {
 
-    if (introState === 0) {
-      introState = 1;
-      slide++;
-      audio.loop();
-      slideShow();
-    } else if (introState === 1) {
-      // do nothing
-    } else if (introState === 2) {
-      paintLayer.clear();
-      textLayer.clear();
-      introState++;
-      writeTextUI();
-      //writeTextUIAudio();
-    } else if (introState === 3) {
+    if (introState === 3) {
       setProperties(winMouseX, winMouseY);
+    } else {
+      // do something related to slideshow
     }
-    //return false;
   }
 
   function setProperties(_x, _y) {
     tempwinMouseX = ((windowWidth / 2) - _x); // record position on downpress
     tempwinMouseY = ((windowHeight / 2) - _y); // record position on downpress
     brushTemp = int(random(1, 20));
-    //  tint(255, 0.01); // Display at half opacit
 
     if (bool) {
       //image(bg, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
       let swatchTemp = int(random(0, 5));
-
       if (colourBool) {
         colHue = cloudHSB[swatchTemp][0];
         colSat = cloudHSB[swatchTemp][1];
@@ -171,16 +146,30 @@
 
   function draw() {
 
-    if (introState < 3) {
-      autoDraw();
+    if (introState === 3) {
+      backdrop();
+      blendMode(DARKEST);
+      image(paintLayer, width / 2, height / 2);
+      blendMode(LIGHTEST);
+      image(traceLayer, width / 2, height / 2);
+      blendMode(BLEND);
+      image(textLayer, width / 2, height / 2);
+    } else {
+      blendMode(BLEND);
+      background(352, 68, 89, 100);
+      if (slide > 0) {
+        autoDraw();
+      }
+
+      if (slide === 0) {
+        textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
+      } else {
+        textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
+      } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
+      imageMode(CORNER)
+      image(paintLayer, 0, 0, width, height);
+      image(textLayer, 0, 0, width, height);
     }
-    backdrop();
-    blendMode(DARKEST);
-    image(paintLayer, width / 2, height / 2);
-    blendMode(LIGHTEST);
-    image(traceLayer, width / 2, height / 2);
-    blendMode(BLEND);
-    image(textLayer, width / 2, height / 2);
 
   }
 
@@ -191,10 +180,17 @@
 
   function touchMoved() {
 
-    if (eraseState === 0 && introState === 3) {
-      makeDrawing(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+    if (introState === 3) {
+
+      if (eraseState === 0) {
+        makeDrawing(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+      } else {
+        eraseDrawing();
+      }
     } else {
-      eraseDrawing();
+      paintLayer.fill(352, 68, 89, 0.1);
+      paintLayer.noStroke();
+      paintLayer.circle(winMouseX, winMouseY, vMax*10, vMax*10);
     }
     return false;
   }
@@ -233,10 +229,10 @@
       }
     } else {
 
-          for (let i = 0; i < 5; i++){
+      for (let i = 0; i < 5; i++) {
         traceLayer.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), .8, 3.5)); // for line work
         traceLayer.stroke(255, 0, 255, 0.4); // for line work
-        traceLayer.line(_x+random(-3,3), _y+random(-3,3), pX+random(-3,3), pY+random(-3,3));
+        traceLayer.line(_x + random(-3, 3), _y + random(-3, 3), pX + random(-3, 3), pY + random(-3, 3));
       }
 
     }
@@ -278,7 +274,7 @@
     button2C.remove();
     button3.remove();
     resetButton.remove();
-      button4.remove();
+    button4.remove();
     writeTextUI();
 
   }
