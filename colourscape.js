@@ -28,6 +28,8 @@
   let colOpacity = 0.4;
   let colourBool = 0;
 
+  let introLayer;
+
 
 
   let cloudHSB = [
@@ -79,6 +81,7 @@
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
     audio = loadSound('assets/audio.mp3');
+      click = loadSound('assets/click.mp3');
   }
 
   function setup() {
@@ -105,8 +108,10 @@
 
     setProperties(0, 0);
     autoSetProperties();
-
+    introLayer = createGraphics(width, height);
+    introLayer.blendMode(BLEND);
     textLayer = createGraphics(windowWidth, windowHeight);
+    slide = 0;
     slideShow();
   }
 
@@ -162,7 +167,7 @@
       }
 
       if (slide === 0) {
-        textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
+        //textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
       } else {
         textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
       } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
@@ -222,7 +227,7 @@
         angle1 = atan2(dy, dx) + (random(-rotateDrift, rotateDrift)); // https://p5js.org/reference/#/p5/atan2
         tempX = _x - (cos(angle1) * segLength / 2); // https://p5js.org/examples/interaction-follow-1.html
         tempY = _y - (sin(angle1) * segLength / 2);
-        scalar = constrain(50 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
+        scalar = constrain(70 * (random(3, abs(_x - pX)) / windowWidth), 0.2, 1.2);
         segment(tempX, tempY, angle1, brush[brushTemp], scalar)
 
         milliTrack = milliCounter;
@@ -264,17 +269,23 @@
 
 
   function windowResized() {
-    paintLayer.clear();
-    textLayer.clear();
-    traceLayer.clear();
-    button1A.remove();
-    button1B.remove();
-    button2A.remove();
-    button2B.remove();
-    button2C.remove();
-    button3.remove();
-    resetButton.remove();
-    button4.remove();
-    writeTextUI();
 
+    resizeCanvas(windowWidth, windowHeight);
+    textLayer.resizeCanvas(windowWidth, windowHeight);
+
+
+      let paintNew = createGraphics(windowWidth, windowHeight);
+      paintNew.image(paintLayer,0,0,windowWidth, windowHeight);
+      paintLayer.resizeCanvas(windowWidth, windowHeight);
+      paintLayer = paintNew;
+
+      let traceNew = createGraphics(windowWidth, windowHeight);
+      traceNew.image(traceLayer,0,0,windowWidth, windowHeight);
+      traceLayer.resizeCanvas(windowWidth, windowHeight);
+      traceLayer = traceNew;
+
+      calcDimensions();
+      removeElements();
+      writeTextUI();
+    
   }

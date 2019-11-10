@@ -99,7 +99,7 @@
 
 
   function switchToPaint() {
-
+  click.play();
     eraseState = 0;
     eraserVersion = 0;
     resetButtons();
@@ -135,7 +135,7 @@ else {
   }
 
   function switchToTrace() {
-
+  click.play();
     bool = 0;
     eraseState = 0; // revert to True for erase before passing back to eraser function, which inverts
     eraserVersion = 0;
@@ -152,7 +152,7 @@ else {
 
 
   function eraser() {
-
+  click.play();
     resetButtons();
 
     if (eraseState === 1) {
@@ -179,11 +179,13 @@ else {
   }
 
   function saveImage() {
+      click.play();
     save('colourscape' + month() + day() + hour() + second() + '.jpg');
   }
 
 
   function fs(){
+      click.play();
 
 
    if (!fsBool){
