@@ -151,8 +151,7 @@
 
   function draw() {
 
-
-    if (introState === 3) {
+      if (introState === 3) {
       backdrop();
       blendMode(DARKEST);
       image(paintLayer, width / 2, height / 2);
@@ -272,26 +271,16 @@
   function windowResized() {
 
     resizeCanvas(windowWidth, windowHeight);
-    textLayer.resizeCanvas(windowWidth, windowHeight);
-
-      // let paintNew = createGraphics(windowWidth, windowHeight);
-      // paintNew.image(paintLayer,0,0,windowWidth, windowHeight);
-       paintLayer.resizeCanvas(windowWidth, windowHeight);
-       // paintLayer = paintNew;
-      // paintNew.remove();
-
-    //   let traceNew = createGraphics(windowWidth, windowHeight);
-    //   traceNew.image(traceLayer,0,0,windowWidth, windowHeight);
-      traceLayer.resizeCanvas(windowWidth, windowHeight);
-    //   traceLayer = traceNew;
-    //   traceNew.remove();
+    // textLayer.resizeCanvas(windowWidth, windowHeight);
     //
-      calcDimensions();
-      autoSetProperties();
+    //    paintLayer.resizeCanvas(windowWidth, windowHeight);
+    //
+    //   traceLayer.resizeCanvas(windowWidth, windowHeight);
 
+      calcDimensions();
       if (introState === 3){
      removeElements();
      writeTextUI();
+    resetButtons();
     }
-
   }
