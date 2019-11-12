@@ -271,11 +271,11 @@
   function windowResized() {
 
     resizeCanvas(windowWidth, windowHeight);
-    // textLayer.resizeCanvas(windowWidth, windowHeight);
-    //
-    //    paintLayer.resizeCanvas(windowWidth, windowHeight);
-    //
-    //   traceLayer.resizeCanvas(windowWidth, windowHeight);
+    textLayer.resizeCanvas(windowWidth, windowHeight);
+    
+       paintLayer.resizeCanvas(windowWidth, windowHeight);
+
+      traceLayer.resizeCanvas(windowWidth, windowHeight);
 
       calcDimensions();
       if (introState === 3){
