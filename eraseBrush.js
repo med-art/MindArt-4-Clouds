@@ -1,6 +1,5 @@
 function eraseDrawing() {
 
-  console.log(eraserVersion);
 
   if (eraserVersion) {
 

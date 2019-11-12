@@ -151,6 +151,7 @@
 
   function draw() {
 
+
     if (introState === 3) {
       backdrop();
       blendMode(DARKEST);
@@ -273,19 +274,24 @@
     resizeCanvas(windowWidth, windowHeight);
     textLayer.resizeCanvas(windowWidth, windowHeight);
 
+      // let paintNew = createGraphics(windowWidth, windowHeight);
+      // paintNew.image(paintLayer,0,0,windowWidth, windowHeight);
+       paintLayer.resizeCanvas(windowWidth, windowHeight);
+       // paintLayer = paintNew;
+      // paintNew.remove();
 
-      let paintNew = createGraphics(windowWidth, windowHeight);
-      paintNew.image(paintLayer,0,0,windowWidth, windowHeight);
-      paintLayer.resizeCanvas(windowWidth, windowHeight);
-      paintLayer = paintNew;
-
-      let traceNew = createGraphics(windowWidth, windowHeight);
-      traceNew.image(traceLayer,0,0,windowWidth, windowHeight);
+    //   let traceNew = createGraphics(windowWidth, windowHeight);
+    //   traceNew.image(traceLayer,0,0,windowWidth, windowHeight);
       traceLayer.resizeCanvas(windowWidth, windowHeight);
-      traceLayer = traceNew;
-
+    //   traceLayer = traceNew;
+    //   traceNew.remove();
+    //
       calcDimensions();
-      removeElements();
-      writeTextUI();
-    
+      autoSetProperties();
+
+      if (introState === 3){
+     removeElements();
+     writeTextUI();
+    }
+
   }

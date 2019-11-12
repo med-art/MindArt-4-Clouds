@@ -48,12 +48,12 @@ function slideShow() {
     textLayer.textSize(vMax*8);
     textLayer.textAlign(CENTER, CENTER);
     textLayer.rectMode(CENTER);
-    //textLayer.text(introText[slide], width+(width/2), (height/8)*(slide+2));
+
 
 if (slide > 0){
 
 if (slide === introText.length-1){
-  delayTime = 10000;
+  delayTime = 1000;
 }
 
       slide++;
