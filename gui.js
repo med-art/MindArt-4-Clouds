@@ -35,17 +35,19 @@
     button3.style('width', '21vmax');
     button3.position(36.5 * vMax, height - (14 * vMax));
     button3.mousePressed(eraser);
-    saveButton = createButton("Save");
+
+    saveButton = createButton("Sauvegardez");
     saveButton.class("select");
-    saveButton.style('font-size', '2.6vmax');
-    saveButton.style('height', '4vmax');
-    saveButton.position(width - (13.5 * vMax), height - (12.5 * vMax));
+    saveButton.style('font-size', '1.7vmax');
+    saveButton.style('height', '5vmax');
+    saveButton.position(width - (16 * vMax), height - (12.5 * vMax));
     saveButton.mousePressed(saveImage);
-    resetButton = createButton("New");
+
+    resetButton = createButton("Suivant");
     resetButton.class("select");
-    resetButton.style('font-size', '2.6vmax');
-    resetButton.style('height', '4vmax');
-    resetButton.position(width - (13.5 * vMax), height - (6.5 * vMax));
+    resetButton.style('font-size', '1.7vmax');
+    resetButton.style('height', '5vmax');
+    resetButton.position(width - (16 * vMax), height - (6.5 * vMax));
     resetButton.mousePressed(reset);
 
     fsButton = createImg('assets/enterFS.png');
