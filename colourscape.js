@@ -281,6 +281,6 @@
       if (introState === 3){
      removeElements();
      writeTextUI();
-    resetButtons();
+
     }
   }
