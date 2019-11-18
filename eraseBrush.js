@@ -11,9 +11,9 @@ function eraseDrawing() {
 
         else {
           traceLayer.blendMode(BLEND);
-          traceLayer.noStroke();
-          traceLayer.fill(255,0,0,0.4);
-          traceLayer.circle(mouseX, mouseY, 40, 40);
+          traceLayer.strokeWeight(40);
+          traceLayer.stroke(255,0,0,0.4);
+          traceLayer.line(mouseX, mouseY, pmouseX, pmouseY);
           traceLayer.blendMode(LIGHTEST);
 
               }
