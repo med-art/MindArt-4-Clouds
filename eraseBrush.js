@@ -4,8 +4,9 @@ function eraseDrawing() {
   if (eraserVersion) {
 
     paintLayer.noStroke();
-    paintLayer.fill(255,0,255,0.4);
-    paintLayer.circle(mouseX, mouseY, 50, 50);
+    paintLayer.strokeWeight(100);
+    paintLayer.stroke(255,0,255,0.4);
+    paintLayer.line(mouseX, mouseY, pMouseX, pMouseY);
 
         }
 
