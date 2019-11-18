@@ -6,7 +6,7 @@ function eraseDrawing() {
     paintLayer.noStroke();
     paintLayer.strokeWeight(100);
     paintLayer.stroke(255,0,255,0.4);
-    paintLayer.line(mouseX, mouseY, pMouseX, pMouseY);
+    paintLayer.line(mouseX, mouseY, pmouseX, pmouseY);
 
         }
 
