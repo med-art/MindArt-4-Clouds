@@ -162,6 +162,7 @@ let pressureStore = [];
 
   function touchStarted(){
     paintLayer.strokeWeight(100);
+        paintLayer.stroke(255, 0, 255, 0.9);
     paintLayer.strokeJoin(ROUND);
     paintLayer.noFill();
 
