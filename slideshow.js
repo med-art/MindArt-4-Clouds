@@ -33,10 +33,12 @@ function slideShow() {
     textLayer.remove();
     introState = 3;
     writeTextUI();
-     imageMode(CENTER)
-    paintLayer.clear();
+    imageMode(CENTER)
     textLayer.clear();
-    traceLayer.clear();
+
+    autoCopy();
+
+
     slide = 4;
     counter = 0;
   }

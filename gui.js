@@ -23,38 +23,38 @@
     textSize(windowWidth / 50);
     fill(0);
     noStroke();
-      button1 = createImg("assets/icon1.0.png");
-      button1.remove();
-      button1 = createImg("assets/icon1.2.png");
-      button1.remove();
-    button1 = createImg("assets/icon1.1.png");
-
-      button2 = createImg("assets/icon2.1.png");
-      button2.remove()
-        button2 = createImg("assets/icon2.0.png");
-          button3 = createImg("assets/icon3.1.png");
-        button3.remove();
-          button3 = createImg("assets/icon3.2.png");
-          button3.remove();
-          button3 = createImg("assets/icon3.0.png");
-
-
-    button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
-    button1.position(0, height - (14 * vMax));
-    button1.mousePressed(switchToPaint);
-    button2.style('width', '14vmax');
-    button2.position(23.5 * vMax, height - (14 * vMax));
-    button2.mousePressed(switchToTrace);
-    button3.style('width', '21vmax');
-    button3.position(36.5 * vMax, height - (14 * vMax));
-    button3.mousePressed(eraser);
-
-    saveButton = createButton("Sauvegardez");
-    saveButton.class("select");
-    saveButton.style('font-size', '1.7vmax');
-    saveButton.style('height', '5vmax');
-    saveButton.position(width - (16 * vMax), height - (12.5 * vMax));
-    saveButton.mousePressed(saveImage);
+    //   button1 = createImg("assets/icon1.0.png");
+    //   button1.remove();
+    //   button1 = createImg("assets/icon1.2.png");
+    //   button1.remove();
+    // button1 = createImg("assets/icon1.1.png");
+    //
+    //   button2 = createImg("assets/icon2.1.png");
+    //   button2.remove()
+    //     button2 = createImg("assets/icon2.0.png");
+    //       button3 = createImg("assets/icon3.1.png");
+    //     button3.remove();
+    //       button3 = createImg("assets/icon3.2.png");
+    //       button3.remove();
+    //       button3 = createImg("assets/icon3.0.png");
+    //
+    //
+    // button1.style('width', '24.5vmax'); // 28 is 1.75 * 16.
+    // button1.position(0, height - (14 * vMax));
+    // button1.mousePressed(switchToPaint);
+    // button2.style('width', '14vmax');
+    // button2.position(23.5 * vMax, height - (14 * vMax));
+    // button2.mousePressed(switchToTrace);
+    // button3.style('width', '21vmax');
+    // button3.position(36.5 * vMax, height - (14 * vMax));
+    // button3.mousePressed(eraser);
+    //
+    // saveButton = createButton("Sauvegardez");
+    // saveButton.class("select");
+    // saveButton.style('font-size', '1.7vmax');
+    // saveButton.style('height', '5vmax');
+    // saveButton.position(width - (16 * vMax), height - (12.5 * vMax));
+    // saveButton.mousePressed(saveImage);
 
     resetButton = createButton("Suivant");
     resetButton.class("select");
@@ -63,10 +63,10 @@
     resetButton.position(width - (16 * vMax), height - (6.5 * vMax));
     resetButton.mousePressed(reset);
 
-    fsButton = createImg('assets/enterFS.png');
-    fsButton.style('height', '4vmax');
-    fsButton.position(width - (7.5 * vMax), 1.5 * vMax);
-    fsButton.mousePressed(fs);
+    // fsButton = createImg('assets/enterFS.png');
+    // fsButton.style('height', '4vmax');
+    // fsButton.position(width - (7.5 * vMax), 1.5 * vMax);
+    // fsButton.mousePressed(fs);
   }
 
   function resetButtons() {
