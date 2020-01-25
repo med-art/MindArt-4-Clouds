@@ -181,7 +181,7 @@ function touchEnded(){
 
     vertices[0].push(mouseX);
     vertices[1].push(mouseY);
-    pressureStore.push(getPressure(ev)+1);
+    pressureStore.push(getPressure(ev));
 
     paintLayer.beginShape();
     for (let i = 0; i < vertices[0].length; i++){
@@ -189,7 +189,7 @@ function touchEnded(){
       if ((i % 4) === 0 ){
       paintLayer.curveVertex(vertices[0][i], vertices[1][i]); // repeated below, annoying..
       paintLayer.endShape();
-     paintLayer.strokeWeight(pressureStore[i]*10)
+     paintLayer.strokeWeight(pressureStore[i]*100)
       paintLayer.beginShape();
         paintLayer.curveVertex(vertices[0][i-2], vertices[1][i-2])
           paintLayer.curveVertex(vertices[0][i-1], vertices[1][i-1])
