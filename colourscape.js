@@ -226,8 +226,7 @@
   function eraseDrawing(ev) {
     var pressure = getPressure(ev);
     var pressure2 = (pressure + 1);
-    console.log(pressure);
-    let scalar2 = constrain(100 * (random(3, abs(mouseX - pmouseX)) / windowWidth), 50, 60)*pressure2*0.3;
+    let scalar2 = pressure2*40;
     paintLayer.noStroke();
     paintLayer.strokeWeight(scalar2);
     paintLayer.stroke(255, 0, 255, 0.9);
