@@ -1,6 +1,11 @@
   // images
   let bg;
+
+let vertices = [];
+let pressureStore = [];
+
   let brush = [];
+  let scalar2 = 40;
   // brush mechanics
   let angle1, segLength;
   let scalar = 30;
@@ -155,12 +160,53 @@
   }
 
 
+  function touchStarted(){
+    paintLayer.strokeWeight(100);
+    paintLayer.strokeJoin(ROUND);
+    paintLayer.noFill();
+
+    vertices[0] = [];
+    vertices[1] = [];
+    pressureStore = [];
+
+  }
+
+function touchEnded(){
+
+  }
 
   function moved(ev) {
     ev.preventDefault();
-    eraseDrawing(ev);
+    //eraseDrawing(ev);
+
+    vertices[0].push(mouseX);
+    vertices[1].push(mouseY);
+    pressureStore.push(getPressure(ev)+1);
+
+    paintLayer.beginShape();
+    for (let i = 0; i < vertices[0].length; i++){
+
+      if ((i % 4) === 0 ){
+      paintLayer.curveVertex(vertices[0][i], vertices[1][i]); // repeated below, annoying..
+      paintLayer.endShape();
+     paintLayer.strokeWeight(pressureStore[i]*10)
+      paintLayer.beginShape();
+        paintLayer.curveVertex(vertices[0][i-2], vertices[1][i-2])
+          paintLayer.curveVertex(vertices[0][i-1], vertices[1][i-1])
+      }
+
+      paintLayer.curveVertex(vertices[0][i], vertices[1][i]);
+      }
+
+
+      paintLayer.endShape();
+
+
+
     return false;
   }
+
+
 
   function autoDraw() {
     pautoX = autoX;
@@ -223,11 +269,11 @@
   getPressure = function (ev) { return ((ev.touches && ev.touches[0] && typeof ev.touches[0]["force"]!=="undefined") ? ev.touches[0]["force"] : 1.0); }
 
 
+
   function eraseDrawing(ev) {
     var pressure = getPressure(ev);
-
-    let scalar2 = pressure*40;
-    paintLayer.noStroke();
+    scalar2 = ((Math.log(pressure+1)*40)+scalar2)/2;
+    //paintLayer.noStroke();
     paintLayer.strokeWeight(scalar2);
     paintLayer.stroke(255, 0, 255, 0.9);
     paintLayer.line(mouseX, mouseY, pmouseX, pmouseY);

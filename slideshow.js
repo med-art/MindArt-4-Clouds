@@ -8,7 +8,7 @@ let startButton;
 function mousePressed() {
   if (introState < 3) {
     if (audio.isPlaying()) {} else {
-      audio.loop(5);
+      //audio.loop(5);
     }
   }
   if (slide === 0) {
