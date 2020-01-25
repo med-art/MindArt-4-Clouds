@@ -188,7 +188,6 @@
   }
 
 
-  getPressure = function (ev) { return ((ev.touches && ev.touches[0] && typeof ev.touches[0]["force"]!=="undefined") ? ev.touches[0]["force"] : 1.0); }
 
   function segment(rakeX, rakeY, a, rake, scalar) {
     autoLayer.tint((colHue += random(-hueDrift, hueDrift)), (colSat += random(-satDrift, satDrift)), colBri, colOpacity); // Display at half opacity
@@ -221,10 +220,13 @@
     }
   }
 
+  getPressure = function (ev) { return ((ev.touches && ev.touches[0] && typeof ev.touches[0]["force"]!=="undefined") ? ev.touches[0]["force"] : 1.0); }
+
+
   function eraseDrawing(ev) {
     var pressure = getPressure(ev);
     console.log(pressure);
-    let scalar2 = constrain(3000 * (random(3, abs(mouseX - pmouseX)) / windowWidth), 50, 60);
+    let scalar2 = constrain(3000 * (random(3, abs(mouseX - pmouseX)) / windowWidth), 50, 60)*pressure;
     paintLayer.noStroke();
     paintLayer.strokeWeight(scalar2);
     paintLayer.stroke(255, 0, 255, 0.1);
