@@ -157,6 +157,7 @@
 
 
   function moved(ev) {
+    ev.preventDefault();
     eraseDrawing(ev);
     return false;
   }
