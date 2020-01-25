@@ -165,8 +165,8 @@
   function autoDraw() {
     pautoX = autoX;
     pautoY = autoY;
-    autoX = autoX + (random(-100, 130));
-    autoY = autoY + (random(-100, 110));
+    autoX = autoX + (random(-40, 60));
+    autoY = autoY + (random(-40, 60));
     makeDrawing(autoX % width, autoY % height, pautoX % width, pautoY % height);
   }
 
@@ -229,6 +229,6 @@
     let scalar2 = constrain(3000 * (random(3, abs(mouseX - pmouseX)) / windowWidth), 50, 60)*pressure;
     paintLayer.noStroke();
     paintLayer.strokeWeight(scalar2);
-    paintLayer.stroke(255, 0, 255, 0.1);
+    paintLayer.stroke(255, 0, 255, 0.9);
     paintLayer.line(mouseX, mouseY, pmouseX, pmouseY);
   }
